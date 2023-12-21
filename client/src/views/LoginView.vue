@@ -16,18 +16,23 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import GoogleSignIn from '../components/GoogleSignIn.vue'
+import GoogleSignIn from '../components/GoogleSignIn.vue';
+import { initSupabase } from '../utils/supabase';
 
 export default defineComponent({
     name: 'LoginView',
     components: {
         GoogleSignIn
+    },
+    mounted() {
+        initSupabase();
     }
 });
 </script>
 
 <style lang="scss" scoped>
 #login {
+    user-select: none;
     overflow: hidden;
     width: 100vw;
     height: 100vh;
