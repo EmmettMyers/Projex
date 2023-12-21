@@ -6,8 +6,9 @@
 body {
   padding: 0; 
   margin: 0;
-  line-height: 0;
   font-family: 'Roboto';
+  background: #F0F1F4;
+  color: #313235;
 }
 .center-horiz {
   display: flex;

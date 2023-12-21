@@ -1,22 +1,28 @@
 <template>
   <div id="button">
-    <div class="center-vert">
-      <img src="../assets/google.png" />
+    <div class="center-vert" @click="signIn">
+      <img src="../assets/logos/google.png" />
       <div id="signin-txt">Sign in with Google</div>
     </div>
-    <div></div>
   </div>
 </template>
 
 <script lang="ts">
+import { initGooglePopup } from '@/utils/supabase';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'GoogleSignIn'
+  name: 'GoogleSignIn',
+  methods: {
+    signIn() {
+      this.$router.push('/home');
+      //initGooglePopup();
+    }
+  }
 });
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 #button {
   width: 450px;
   height: 70px;
