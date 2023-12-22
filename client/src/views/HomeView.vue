@@ -10,11 +10,7 @@
         <div id="blue-line"></div>
         <div id="past-generations-title">Your Past Generated Projects</div>
         <div id="project-holder">
-          <HomeProjectBox />
-          <HomeProjectBox />
-          <HomeProjectBox />
-          <HomeProjectBox />
-          <HomeProjectBox />
+          <HomeProjectBox v-for="(project, index) in pastGeneratedProjects" :key="index" :project="project" />
           <div style="height: 30px"></div>
         </div>
       </div>
@@ -23,12 +19,16 @@
         <div id="pref-btn" class="center-horiz center-vert" @click="enterPreferences">
           Set Project Preferences
         </div>
-        <div id="gen-btn" class="center-horiz center-vert">Generate<br>Project<br>Ideas</div>
+        <div id="gen-btn" class="center-horiz center-vert" @click="enterGenerate">
+          Generate<br>Project<br>Ideas
+        </div>
         <div id="bottom-btn-holder">
           <div id="saved-btn" class="center-horiz center-vert" @click="enterSaved">
             View<br>Saved<br>Projects
           </div>
-          <div id="pool-btn" class="center-horiz center-vert">Explore<br>Project<br>Pool</div>
+          <div id="pool-btn" class="center-horiz center-vert" @click="enterPool">
+            Explore<br>Project<br>Pool
+          </div>
         </div>
       </div>
 
@@ -39,19 +39,31 @@
 <script lang="ts">
   import NavBar from '@/components/NavBar.vue';
   import HomeProjectBox from '@/components/HomeProjectBox.vue';
+  import { pastGenerations } from '@/utils/past-generations';
   import { defineComponent } from 'vue';
 
   export default defineComponent({
-      name: 'HomeView',
-      components: { NavBar, HomeProjectBox },
-      methods: {
-        enterPreferences() {
-          this.$router.push('/preferences');
-        },
-        enterSaved() {
-          this.$router.push('/saved');
-        },
+    name: 'HomeView',
+    components: { NavBar, HomeProjectBox },
+    methods: {
+      enterPreferences() {
+        this.$router.push('/preferences');
       },
+      enterSaved() {
+        this.$router.push('/saved');
+      },
+      enterPool() {
+        this.$router.push('/pool');
+      },
+      enterGenerate() {
+        this.$router.push('/generate');
+      },
+    },
+    data() {
+      return {
+        pastGeneratedProjects: pastGenerations.value
+      };
+    },
   });
 </script>
 
@@ -88,7 +100,7 @@
       #project-holder {
         height: 440px;
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
       }
       #project-holder::-webkit-scrollbar {
         width: 6px;

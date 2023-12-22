@@ -16,12 +16,22 @@
       </div>
       <div id="btn-holder">
         <CustomButton 
+          v-if="project.saved"
+          text="Unsave" 
+          backColor="#E22C2C" 
+          textColor="#FDEBEB" 
+          horizPad="30px" 
+          vertPad="8px" 
+          fontSize="18px"
+        />
+        <CustomButton 
+          v-else
           text="Save" 
           backColor="#328D30" 
           textColor="#D8FFD8" 
-          horizPad="22px" 
+          horizPad="30px" 
           vertPad="8px" 
-          fontSize="17px"
+          fontSize="18px"
         />
       </div>
     </div>
@@ -39,24 +49,8 @@
   
   export default defineComponent({
     name: 'HomeProjectBox',
+    props: ['project'],
     components: { CustomButton },
-    data() {
-        return {
-            project: {
-                name: 'Food Cart',
-                description: 'A user-friendly web app allowing food cart vendors to showcase their menu, accept orders, and facilitate seamless transactions with customers.',
-                difficulty: 'Intermediate',
-                time: '2-3 weeks',
-                tools: [
-                    { name: 'HTML', logo: 'html.png' },
-                    { name: 'CSS', logo: 'css.png' },
-                    { name: 'JavaScript', logo: 'javascript.png' },
-                ],
-                image: 'project-image.png',
-                saved: false,
-            },
-        };
-    },
     methods: {
     },
   });

@@ -1,9 +1,9 @@
 <template>
     <div>
         <NavBar />
-        <div id="saved">
+        <div id="pool">
             <PageHeader :title="pageTitle" :description="pageDescription" />
-            <ProjectBox v-for="(project, index) in savedProjects" :key="index" :project="project" />
+            <ProjectBox v-for="(project, index) in projectPool" :key="index" :project="project" />
             <div style="height: 40px"></div>
         </div>
     </div>
@@ -13,24 +13,24 @@
     import NavBar from '@/components/NavBar.vue';
     import PageHeader from '@/components/PageHeader.vue';
     import ProjectBox from '@/components/ProjectBox.vue';
-    import { savedProjects } from '@/utils/saved-projects';
+    import { projectPool } from '@/utils/project-pool';
     import { defineComponent } from 'vue';
 
     export default defineComponent({
-        name: 'SavedView',
+        name: 'PoolView',
         components: { NavBar, PageHeader, ProjectBox },
         data() {
             return {
-                pageTitle: "Saved Projects",
-                pageDescription: "Stores projects you have saved from generation or community.",
-                savedProjects: savedProjects.value
+                pageTitle: "Project Pool",
+                pageDescription: "Discover unsaved projects generated from other users and their preferences.",
+                projectPool: projectPool.value
             };
         },
     });
 </script>
     
 <style lang='scss' scoped>
-    #saved {
+    #pool {
         height: 93vh;
         overflow-x: hidden;
         overflow-y: auto;

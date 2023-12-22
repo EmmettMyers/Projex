@@ -35,9 +35,19 @@
                     </div>
                     <div id="save-btn" style="margin-left: 5px;">
                         <CustomButton 
+                            v-if="project.saved"
                             text="Unsave" 
                             backColor="#E22C2C" 
                             textColor="#FDEBEB" 
+                            horizPad="30px" 
+                            vertPad="8px" 
+                            fontSize="18px"
+                        />
+                        <CustomButton 
+                            v-else
+                            text="Save" 
+                            backColor="#328D30" 
+                            textColor="#D8FFD8" 
                             horizPad="30px" 
                             vertPad="8px" 
                             fontSize="18px"
@@ -59,23 +69,7 @@
     export default defineComponent({
         name: 'ProjectBox',
         components: { CustomButton },
-        data() {
-            return {
-                project: {
-                    name: 'SportsMatch Tracker',
-                    description: 'Create a dynamic sports match tracker website that allows users to input and track scores, statistics, and highlights of their favorite sports matches. Users can customize the interface based on their preferred sports, teams, and players. Implement machine learning algorithms to provide insightful match predictions and player performance analytics. The website can also feature real-time updates and notifications for ongoing matches, making it an engaging platform for sports enthusiasts.',
-                    difficulty: 'Intermediate',
-                    time: '2-3 weeks',
-                    tools: [
-                        { name: 'HTML', logo: 'html.png' },
-                        { name: 'CSS', logo: 'css.png' },
-                        { name: 'JavaScript', logo: 'javascript.png' },
-                    ],
-                    image: 'project-image.png',
-                    saved: false,
-                },
-            };
-        },
+        props: ['project'],
         methods: {
         },
     });
@@ -115,6 +109,7 @@
                     margin-top: 20px;
                     margin-left: 30px;
                     margin-right: 20px;
+                    border-radius: 4px;
                 }
                 #tool-holder {
                     padding-top: 22px;

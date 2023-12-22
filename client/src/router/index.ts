@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import PreferencesView from '@/views/PreferencesView.vue'
 import SavedView from '@/views/SavedView.vue'
+import PoolView from '@/views/PoolView.vue'
+import GenerateView from '@/views/GenerateView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +26,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/saved',
     name: 'saved',
     component: SavedView
+  },
+  {
+    path: '/pool',
+    name: 'pool',
+    component: PoolView
+  },
+  {
+    path: '/generate',
+    name: 'generate',
+    component: GenerateView
   },
   {
     path: '/:pathMatch(.*)*',
