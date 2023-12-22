@@ -7,10 +7,22 @@
         <div id="divider">&nbsp; | </div>
       </div>
       <div id="tool-holder" v-for="(tool, index) in project.tools" :key="index">
-        <img :src="require(`@/assets/tools/${tool.logo}`)" :alt="tool.name" width="25" height="25" />
+        <img 
+          :src="require(`@/assets/tools/${tool.logo}`)" 
+          :alt="tool.name" 
+          width="25" 
+          height="25" 
+        />
       </div>
       <div id="btn-holder">
-        <CustomButton />
+        <CustomButton 
+          text="Save" 
+          backColor="#328D30" 
+          textColor="#D8FFD8" 
+          horizPad="22px" 
+          vertPad="8px" 
+          fontSize="17px"
+        />
       </div>
     </div>
 
@@ -91,7 +103,7 @@
     }
     #desc-holder {
       padding-top: 5px;
-      padding-bottom: 20px;
+      padding-bottom: 15px;
       padding-left: 20px;
       padding-right: 20px;
       font-size: 20px;

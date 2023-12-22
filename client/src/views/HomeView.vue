@@ -25,7 +25,9 @@
         </div>
         <div id="gen-btn" class="center-horiz center-vert">Generate<br>Project<br>Ideas</div>
         <div id="bottom-btn-holder">
-          <div id="saved-btn" class="center-horiz center-vert">View<br>Saved<br>Projects</div>
+          <div id="saved-btn" class="center-horiz center-vert" @click="enterSaved">
+            View<br>Saved<br>Projects
+          </div>
           <div id="pool-btn" class="center-horiz center-vert">Explore<br>Project<br>Pool</div>
         </div>
       </div>
@@ -45,6 +47,9 @@
       methods: {
         enterPreferences() {
           this.$router.push('/preferences');
+        },
+        enterSaved() {
+          this.$router.push('/saved');
         },
       },
   });

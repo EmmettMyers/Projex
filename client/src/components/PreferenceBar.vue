@@ -30,15 +30,16 @@
     }
     #box {
       margin-top: 8px;
-      width: 89vw;
+      width: 88vw;
       height: 80px;
       background: #7DBCCE;
       border-radius: 8px;
       border: 2px solid #313235;
       display: flex;
-      padding-left: 10px;
+      padding-left: 20px;
+      overflow-x: auto;
       .option-box {
-        margin-left: 10px;
+        margin-right: 10px;
         height: 75%;
         padding-left: 40px;
         padding-right: 40px;
@@ -47,6 +48,19 @@
         font-size: 23px;
         font-weight: 400;
       }
+    }
+    #box::-webkit-scrollbar {
+      height: 6px;
+    }
+    #box::-webkit-scrollbar-thumb {
+      background-color: #313235;
+      transition: background-color 0.3s ease;
+    }
+    #box::-webkit-scrollbar-thumb:hover {
+      background-color: #6e6f73;
+    }
+    #box::-webkit-scrollbar-track {
+      background-color: #7DBCCE;
     }
   }
 </style>

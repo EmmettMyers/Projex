@@ -26,7 +26,7 @@
         pageTitle: "Preferences",
         pageDescription: "Stores your generation preferences to streamline the creation process.",
         projectInterests: ['Website', 'Machine Learning', 'Mobile App'],
-        toolsKnown: ['HTML', 'CSS', 'Java', 'Python', 'JavaScript'],
+        toolsKnown: ['HTML', 'CSS', 'Java', 'Python'],
         toolsDesiredToLearn: ['React', 'Vue', 'Flask'],
         topicInterests: ['Sports', 'Video Games', 'Cats'],
       };
@@ -38,7 +38,7 @@
   #preferences {
     height: 93vh;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 </style>
   
