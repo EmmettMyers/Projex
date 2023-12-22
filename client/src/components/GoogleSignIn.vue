@@ -23,28 +23,28 @@ export default defineComponent({
 </script>
 
 <style lang='scss' scoped>
-#button {
-  width: 450px;
-  height: 70px;
-  margin-top: 60px;
-  border-radius: 9px;
-  background: linear-gradient(to right, #ffffff 50%, #9ed5e4 50%);
-  background-size: 200% 100%;
-  transition: background-position 0.5s ease;
-  &:hover {
-    cursor: pointer;
-    background-position: -100% 0;
+  #button {
+    width: 450px;
+    height: 70px;
+    margin-top: 60px;
+    border-radius: 9px;
+    background: linear-gradient(to right, #ffffff 50%, #9ed5e4 50%);
+    background-size: 200% 100%;
+    transition: background-position 0.5s ease;
+    &:hover {
+      cursor: pointer;
+      background-position: -100% 0;
+    }
+    img {
+      width: 45px;
+      margin-left: 20px;
+    }
+    #signin-txt {
+      font-size: 26px;
+      font-weight: 600;
+      width: 100%;
+      padding-right: 30px;
+      text-align: center;
+    }
   }
-  img {
-    width: 45px;
-    margin-left: 20px;
-  }
-  #signin-txt {
-    font-size: 26px;
-    font-weight: 600;
-    width: 100%;
-    padding-right: 30px;
-    text-align: center;
-  }
-}
 </style>

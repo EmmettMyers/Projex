@@ -9,6 +9,7 @@ body {
   font-family: 'Roboto';
   background: #F0F1F4;
   color: #313235;
+  overflow: hidden;
 }
 .center-horiz {
   display: flex;

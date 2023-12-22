@@ -1,10 +1,10 @@
 <template>
-    <div id="button">
-      {{ text }}
-    </div>
-  </template>
+  <div id="button">
+    {{ text }}
+  </div>
+</template>
   
-  <script lang="ts">
+<script lang="ts">
   import { defineComponent } from 'vue';
   
   export default defineComponent({
@@ -17,9 +17,9 @@
     methods: {
     },
   });
-  </script>
+</script>
   
-  <style lang='scss' scoped>
+<style lang='scss' scoped>
   #button {
     background: #328D30;
     border-radius: 4px;
@@ -36,5 +36,5 @@
       filter: brightness(120%);
     }
   }
-  </style>
+</style>
   

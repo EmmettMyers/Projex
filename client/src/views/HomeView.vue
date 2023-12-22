@@ -9,10 +9,25 @@
         </div>
         <div id="blue-line"></div>
         <div id="past-generations-title">Your Past Generated Projects</div>
-        <HomeProjectBox />
+        <div id="project-holder">
+          <HomeProjectBox />
+          <HomeProjectBox />
+          <HomeProjectBox />
+          <HomeProjectBox />
+          <HomeProjectBox />
+          <div style="height: 30px"></div>
+        </div>
       </div>
 
       <div id="right-holder">
+        <div id="pref-btn" class="center-horiz center-vert" @click="enterPreferences">
+          Set Project Preferences
+        </div>
+        <div id="gen-btn" class="center-horiz center-vert">Generate<br>Project<br>Ideas</div>
+        <div id="bottom-btn-holder">
+          <div id="saved-btn" class="center-horiz center-vert">View<br>Saved<br>Projects</div>
+          <div id="pool-btn" class="center-horiz center-vert">Explore<br>Project<br>Pool</div>
+        </div>
       </div>
 
     </div>
@@ -20,45 +35,104 @@
 </template>
 
 <script lang="ts">
-import NavBar from '@/components/NavBar.vue';
-import HomeProjectBox from '@/components/HomeProjectBox.vue';
-import { defineComponent } from 'vue';
+  import NavBar from '@/components/NavBar.vue';
+  import HomeProjectBox from '@/components/HomeProjectBox.vue';
+  import { defineComponent } from 'vue';
 
-export default defineComponent({
-    name: 'HomeView',
-    components: { NavBar, HomeProjectBox }
-});
+  export default defineComponent({
+      name: 'HomeView',
+      components: { NavBar, HomeProjectBox },
+      methods: {
+        enterPreferences() {
+          this.$router.push('/preferences');
+        },
+      },
+  });
 </script>
 
 <style lang='scss' scoped>
-#home {
-  user-select: none;
-  display: flex;
-  justify-content: center;
-  #left-holder {
-    margin-top: 50px;
-    width: 630px;
-    #motto {
-      font-size: 60px;
-      font-weight: 700;
-      line-height: 110%;
-      span {
-        font-weight: 900;
+  #home {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    #left-holder {
+      margin-right: 40px;
+      margin-top: 50px;
+      width: 670px;
+      #motto {
+        font-size: 60px;
+        font-weight: 700;
+        line-height: 110%;
+        span {
+          font-weight: 900;
+        }
+      }
+      #blue-line {
+        width: 615px;
+        margin-top: 2px;
+        height: 7px;
+        background: #7DBCCE;
+        border-radius: 4px;
+      }
+      #past-generations-title {
+        margin-top: 50px;
+        font-size: 30px;
+        font-weight: 500;
+        padding-bottom: 15px;
+      }
+      #project-holder {
+        height: 440px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+      #project-holder::-webkit-scrollbar {
+        width: 6px;
+      }
+      #project-holder::-webkit-scrollbar-thumb {
+        background-color: #313235;
+        transition: background-color 0.3s ease;
+      }
+      #project-holder::-webkit-scrollbar-thumb:hover {
+        background-color: #6e6f73;
+      }
+      #project-holder::-webkit-scrollbar-track {
+        background-color: #7DBCCE;
       }
     }
-    #blue-line {
-      width: 615px;
-      margin-top: 2px;
-      height: 7px;
-      background: #7DBCCE;
-      border-radius: 4px;
-    }
-    #past-generations-title {
+    #right-holder {
+      margin-left: 50px;
       margin-top: 50px;
-      font-size: 30px;
-      font-weight: 500;
-      padding-bottom: 15px;
+      width: 620px;
+      #pref-btn, #gen-btn, #saved-btn, #pool-btn {
+        background: #7DBCCE;
+        border-radius: 10px;
+        font-weight: 600;
+        text-align: center;
+        transition: filter 0.3s ease;
+        &:hover {
+          cursor: pointer;
+          filter: brightness(110%);
+        }
+      }
+      #pref-btn {
+        height: 100px;
+        font-size: 30px;
+      }
+      #gen-btn {
+        margin-top: 10px;
+        height: 300px;
+        font-size: 48px;
+      }
+      #bottom-btn-holder {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        #saved-btn, #pool-btn {
+          height: 200px;
+          font-size: 30px;
+          width: 305px;
+        }
+      }
     }
   }
-}
 </style>
