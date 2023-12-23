@@ -4,7 +4,7 @@
         <div id="generate">
             <PageHeader :title="pageTitle" :description="pageDescription" />
             <OptionSelect title="Type" :options="types" vert-scroll="true" />
-            <OptionSelect title="Difficulty" :options="difficulties" />
+            <OptionSelect title="Difficulty" :options="difficulties" additionalInfo="aggregate based on your developer proficiencies" />
             <OptionSelect title="Time" :options="times" />
             <OptionSelect title="Tools" :options="tools" custom="true" vert-scroll="true" />
             <OptionSelect title="Topics" :options="topics" custom="true" vert-scroll="true" />
@@ -30,7 +30,7 @@
     import CustomButton from '@/components/CustomButton.vue';
     import OptionSelect from '@/components/OptionSelect.vue';
     import PageHeader from '@/components/PageHeader.vue';
-    import { types, difficulties, times, tools, topics }  from '@/utils/generateOptions';
+    import { types, difficulties, times, tools, topics, resetTools, resetTopics }  from '@/utils/generateOptions';
     import { defineComponent } from 'vue';
 
     export default defineComponent({
@@ -40,13 +40,17 @@
             return {
                 pageTitle: "Generate Project Ideas",
                 pageDescription: "Our artificial intelligence tools will create project ideas based on your preferences and options chosen below.",
-                types: types.value,
-                difficulties: difficulties.value,
-                times: times.value,
-                tools: tools.value,
-                topics: topics.value
+                types: types,
+                difficulties: difficulties,
+                times: times,
+                tools: tools,
+                topics: topics
             };
         },
+        mounted() {
+            resetTools();
+            resetTopics();
+        }
     });
 </script>
     

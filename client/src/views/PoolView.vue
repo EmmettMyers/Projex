@@ -23,7 +23,7 @@
             return {
                 pageTitle: "Project Pool",
                 pageDescription: "Discover unsaved projects generated from other users and their preferences.",
-                projectPool: projectPool.value
+                projectPool: projectPool
             };
         },
     });

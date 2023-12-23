@@ -1,17 +1,33 @@
 <template>
     <div id="add">
         <div id="add-txt">Add your own:</div>
-        <input type="text" id="custom-option">
-        <div id="enter-btn" class="center-vert">Enter</div>
+        <input type="text" id="custom-option" v-model="customOptionValue">
+        <div id="enter-btn" class="center-vert" @click="createOption">Enter</div>
     </div>
 </template>
   
 <script lang="ts">
+  import { tools, topics } from '@/utils/generateOptions';
   import { defineComponent } from 'vue';
   
   export default defineComponent({
     name: 'CustomOption',
+    props: ['section', 'selectedOptions'],
+    data() {
+      return {
+        customOptionValue: '',
+      };
+    },
     methods: {
+      createOption() {
+        if (this.section == 'Tools'){
+          tools.value.unshift(this.customOptionValue);
+        } else if (this.section == 'Topics'){
+          topics.value.unshift(this.customOptionValue);
+        }
+        this.selectedOptions.unshift(this.customOptionValue);
+        this.customOptionValue = '';
+      }
     },
   });
 </script>

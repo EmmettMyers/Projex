@@ -2,7 +2,8 @@
     <div id="options" :class="{ 'center-horiz': true, 'vert-scroll': vertScroll }">
       <div id="top-row">
         <div id="title">{{ title }}</div>
-        <CustomOption v-if="custom" />
+        <div id="addedInfo" v-if="additionalInfo">* {{ additionalInfo }}</div>
+        <CustomOption v-if="custom" :section="title" :selectedOptions="selectedOptions" />
       </div>
       <div id="box" class="center-vert">
         <div 
@@ -24,7 +25,7 @@
   
   export default defineComponent({
     name: 'OptionSelect',
-    props: ['title', 'options', 'custom', 'vertScroll'],
+    props: ['title', 'options', 'additionalInfo', 'custom', 'vertScroll'],
     components: { CustomOption },
     data() {
       return {
@@ -65,6 +66,12 @@
       #title {
         font-size: 30px;
         font-weight: 500;
+      }
+      #addedInfo {
+        padding-top: 13px;
+        padding-left: 40px;
+        font-size: 16px;
+        font-weight: 300;
       }
     }
     #box {

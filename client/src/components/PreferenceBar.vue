@@ -1,6 +1,9 @@
 <template>
     <div id="prefs" class="center-horiz">
-      <div id="title">{{ title }}</div>
+      <div id="top-row">
+        <div id="title">{{ title }}</div>
+        <div id="addedInfo" v-if="additionalInfo">* {{ additionalInfo }}</div>
+      </div>
       <div id="box" class="center-vert">
         <div class="option-box center-vert" v-for="option in options" :key="option">
           {{ option }}
@@ -14,7 +17,7 @@
   
   export default defineComponent({
     name: 'PreferenceBar',
-    props: ['title', 'options'],
+    props: ['title', 'options', 'additionalInfo'],
     methods: {
     },
   });
@@ -23,10 +26,19 @@
 <style lang='scss' scoped>
   #prefs {
     margin-bottom: 25px;
-    #title {
+    #top-row {
       width: 90vw;
-      font-size: 30px;
-      font-weight: 500;
+      display: flex;
+      #title {
+        font-size: 30px;
+        font-weight: 500;
+      }
+      #addedInfo {
+        padding-top: 13px;
+        padding-left: 40px;
+        font-size: 16px;
+        font-weight: 300;
+      }
     }
     #box {
       margin-top: 8px;

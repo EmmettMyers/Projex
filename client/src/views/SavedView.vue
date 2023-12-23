@@ -23,7 +23,7 @@
             return {
                 pageTitle: "Saved Projects",
                 pageDescription: "Stores projects you have saved from generation or community.",
-                savedProjects: savedProjects.value
+                savedProjects: savedProjects
             };
         },
     });
