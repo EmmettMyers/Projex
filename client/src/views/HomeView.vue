@@ -39,7 +39,7 @@
 <script lang="ts">
   import NavBar from '@/components/NavBar.vue';
   import HomeProjectBox from '@/components/HomeProjectBox.vue';
-  import { pastGenerations } from '@/utils/past-generations';
+  import { pastGenerations } from '@/utils/pastGenerations';
   import { defineComponent } from 'vue';
 
   export default defineComponent({

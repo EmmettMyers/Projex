@@ -7,7 +7,7 @@
       <PreferenceBar title="Tools Known" :options="toolsKnown" />
       <PreferenceBar title="Tools Desired To Learn" :options="toolsDesiredToLearn" />
       <PreferenceBar title="Topic Interests" :options="topicInterests" />
-      <div style="height: 40px"></div>
+      <div style="height: 60px"></div>
     </div>
   </div>
 </template>
@@ -16,6 +16,7 @@
   import NavBar from '@/components/NavBar.vue';
   import PageHeader from '@/components/PageHeader.vue';
   import PreferenceBar from '@/components/PreferenceBar.vue';
+  import { projectInterests, toolsKnown, toolsDesiredToLearn, topicInterests }  from '@/utils/preferences';
   import { defineComponent } from 'vue';
   
   export default defineComponent({
@@ -25,10 +26,10 @@
       return {
         pageTitle: "Preferences",
         pageDescription: "Stores your generation preferences to streamline the creation process.",
-        projectInterests: ['Website', 'Machine Learning', 'Mobile App'],
-        toolsKnown: ['HTML', 'CSS', 'Java', 'Python'],
-        toolsDesiredToLearn: ['React', 'Vue', 'Flask'],
-        topicInterests: ['Sports', 'Video Games', 'Cats'],
+        projectInterests: projectInterests.value,
+        toolsKnown: toolsKnown.value,
+        toolsDesiredToLearn: toolsDesiredToLearn.value,
+        topicInterests: topicInterests.value,
       };
     },
   });

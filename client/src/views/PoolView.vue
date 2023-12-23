@@ -13,7 +13,7 @@
     import NavBar from '@/components/NavBar.vue';
     import PageHeader from '@/components/PageHeader.vue';
     import ProjectBox from '@/components/ProjectBox.vue';
-    import { projectPool } from '@/utils/project-pool';
+    import { projectPool } from '@/utils/projectPool';
     import { defineComponent } from 'vue';
 
     export default defineComponent({
