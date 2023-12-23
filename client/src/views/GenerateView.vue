@@ -17,6 +17,7 @@
                         horizPad="80px" 
                         vertPad="12px" 
                         fontSize="30px"
+                        @click="generateProjects"
                     />
                 </div>
             </div>
@@ -46,6 +47,11 @@
                 tools: tools,
                 topics: topics
             };
+        },
+        methods: {
+            generateProjects() {
+                this.$router.push('/generated');
+            },
         },
         mounted() {
             resetTools();

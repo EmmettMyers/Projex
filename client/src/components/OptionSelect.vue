@@ -3,7 +3,7 @@
       <div id="top-row">
         <div id="title">{{ title }}</div>
         <div id="addedInfo" v-if="additionalInfo">* {{ additionalInfo }}</div>
-        <CustomOption v-if="custom" :section="title" :selectedOptions="selectedOptions" />
+        <CustomOption v-if="custom" :section="title" :addOption="addOption" />
       </div>
       <div id="box" class="center-vert">
         <div 
@@ -33,6 +33,9 @@
       };
     },
     methods: {
+      addOption(option: string){
+        this.selectedOptions.unshift(option);
+      },
       optionClicked(option: string) {
         const index = this.selectedOptions.indexOf(option);
         if (index === -1) {

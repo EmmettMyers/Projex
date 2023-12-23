@@ -12,7 +12,7 @@
   
   export default defineComponent({
     name: 'CustomOption',
-    props: ['section', 'selectedOptions'],
+    props: ['section', 'addOption'],
     data() {
       return {
         customOptionValue: '',
@@ -25,7 +25,7 @@
         } else if (this.section == 'Topics'){
           topics.value.unshift(this.customOptionValue);
         }
-        this.selectedOptions.unshift(this.customOptionValue);
+        this.addOption(this.customOptionValue);
         this.customOptionValue = '';
       }
     },

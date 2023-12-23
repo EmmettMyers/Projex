@@ -3,7 +3,7 @@
         <div class="center-vert center-horiz">
             <div id="container">
                 <div class="center-horiz">
-                    <img id="long-logo" src="../assets/logos/logo-long2.png" />
+                    <img id="long-logo" src="../assets/logos/logo-long3.png" />
                     <div id="motto">
                         code your <span>future</span>.
                     </div>
@@ -34,7 +34,7 @@ export default defineComponent({
     height: 100vh;
     background: #313235;
     #container {
-        padding-bottom: 40px;
+        padding-bottom: 8vh;
         #long-logo {
             width: 650px;
         }

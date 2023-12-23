@@ -11,10 +11,14 @@
   
   export default defineComponent({
     name: 'PageHeader',
-    props: ['title', 'description'],
+    props: ['title', 'description', 'miniTitle'],
     methods: {
       exitPage() {
-        this.$router.go(-1);
+        if (this.title == "Generated Projects" || this.miniTitle){
+          this.$router.go(-1);
+        } else {
+          this.$router.push('/home');
+        }
       },
     },
   });

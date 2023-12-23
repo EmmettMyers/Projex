@@ -1,26 +1,52 @@
 <template>
-    <div id="prefs" class="center-horiz">
-      <div id="top-row">
-        <div id="title">{{ title }}</div>
-        <div id="addedInfo" v-if="additionalInfo">* {{ additionalInfo }}</div>
-      </div>
-      <div id="box" class="center-vert">
-        <div class="option-box center-vert" v-for="option in options" :key="option">
-          {{ option }}
-        </div>
+  <div id="prefs" class="center-horiz">
+    <div id="top-row">
+      <div id="title">{{ title }}</div>
+      <div id="addedInfo" v-if="additionalInfo">* {{ additionalInfo }}</div>
+      <div v-if="editMode" id="btn-holder">
+        <CustomButton
+          text="+" 
+          backColor="#328D30" 
+          textColor="#D8FFD8" 
+          horizPad="20px" 
+          vertPad="2px" 
+          fontSize="20px"
+          @click="openAddModal"
+        />
       </div>
     </div>
+    <div id="box" class="center-vert">
+      <div 
+        class="option-box center-vert" 
+        :class="{ 'delete-border': editMode }" 
+        v-for="option in options" 
+        :key="option"
+        @click="deletePreference"
+      >
+        <div id="option-txt">{{ option }}</div>
+        <div v-if="editMode" id="delete-sign">-</div>
+      </div>
+    </div>
+  </div>
 </template>
   
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import CustomButton from './CustomButton.vue';
   
   export default defineComponent({
     name: 'PreferenceBar',
-    props: ['title', 'options', 'additionalInfo'],
+    props: ['title', 'options', 'additionalInfo', 'editMode'],
+    components: { CustomButton },
     methods: {
+      openAddModal() {
+        //
+      },
+      deletePreference() {
+        //
+      }
     },
-  });
+});
 </script>
   
 <style lang='scss' scoped>
@@ -39,6 +65,11 @@
         font-size: 16px;
         font-weight: 300;
       }
+      #btn-holder {
+        margin-left: auto;
+        margin-right: 4px;
+        padding-top: 3px;
+      }
     }
     #box {
       margin-top: 8px;
@@ -50,6 +81,16 @@
       display: flex;
       padding-left: 20px;
       overflow-x: auto;
+      .delete-border {
+        -webkit-box-shadow:inset 0px 0px 0px 3px #E22C2C;
+        -moz-box-shadow:inset 0px 0px 0px 3px #E22C2C;
+        box-shadow:inset 0px 0px 0px 3px #E22C2C;
+        transition: background 0.2s ease;
+        &:hover {
+          cursor: pointer;
+          background: #ffc6c6;
+        }
+      }
       .option-box {
         margin-right: 10px;
         height: 75%;
@@ -57,8 +98,20 @@
         padding-right: 40px;
         background: white;
         border-radius: 8px;
-        font-size: 23px;
-        font-weight: 400;
+        position: relative;
+        #option-txt {
+          font-size: 23px;
+          font-weight: 400;
+        }
+        #delete-sign {
+          font-size: 30px;
+          font-weight: 400;
+          color: #E22C2C;
+          position: absolute;
+          line-height: 0;
+          right: 12px;
+          top: 12px;
+        }
       }
     }
     #box::-webkit-scrollbar {

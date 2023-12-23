@@ -42,6 +42,7 @@
                             horizPad="30px" 
                             vertPad="8px" 
                             fontSize="18px"
+                            @click="unsaveProject"
                         />
                         <CustomButton 
                             v-else
@@ -51,6 +52,7 @@
                             horizPad="30px" 
                             vertPad="8px" 
                             fontSize="18px"
+                            @click="saveProject"
                         />
                     </div>
                 </div>
@@ -71,6 +73,12 @@
         components: { CustomButton },
         props: ['project'],
         methods: {
+            saveProject() {
+                //
+            },
+            unsaveProject() {
+                //
+            },
         },
     });
 </script>
