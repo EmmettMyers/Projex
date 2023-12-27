@@ -30,7 +30,7 @@
 
     export default defineComponent({
         name: 'AddPreferenceModal',
-        props: ['title', 'additionalInfo', 'closeModal'],
+        props: ['title', 'closeModal'],
         components: { CustomButton, OptionSelect },
         data() {
             return {
@@ -90,7 +90,7 @@
                 font-size: 50px;
                 font-weight: 700;
                 padding-top: 30px;
-                padding-bottom: 25px;
+                padding-bottom: 20px;
                 padding-left: 45px;
                 span {
                     font-size: 35px;

@@ -6,7 +6,7 @@
                 'modal-view': inModal
               }"
     >
-      <div id="top-row">
+      <div id="top-row" v-if="!inModal">
         <div id="title">{{ title }}</div>
         <div id="addedInfo" v-if="additionalInfo">* {{ additionalInfo }}</div>
         <CustomOption v-if="custom" :section="title" :addOption="addOption" />
