@@ -36,11 +36,11 @@
   
   export default defineComponent({
     name: 'PreferenceBar',
-    props: ['title', 'options', 'additionalInfo', 'editMode'],
+    props: ['title', 'options', 'additionalInfo', 'editMode', 'openModalParent'],
     components: { CustomButton },
     methods: {
       openAddModal() {
-        //
+        this.openModalParent(this.title);
       },
       deletePreference() {
         //

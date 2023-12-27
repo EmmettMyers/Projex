@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 
-export const pastGenerations = ref([
+export const pastGenerations = ref<Project[]>([
     {
         name: 'Food Cart',
         description: 'A user-friendly web app allowing food cart vendors to showcase their menu, accept orders, and facilitate seamless transactions with customers.',

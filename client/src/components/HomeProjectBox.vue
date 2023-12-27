@@ -4,7 +4,7 @@
     <div id="top-row" class="center-vert">
       <div class="center-vert">
         <div id="name">{{ project.name }}</div>
-        <div id="divider">&nbsp; | </div>
+        <div id="divider"></div>
       </div>
       <div id="tool-holder" v-for="(tool, index) in project.tools" :key="index">
         <img 
@@ -77,14 +77,16 @@
         padding-left: 20px;
       }
       #divider {
-        padding-top: 10px;
-        font-size: 30px;
-        font-weight: 600;
-        color: #7DBCCE;
-        padding-right: 10px;
+        width: 4px;
+        height: 30px;
+        background: #7DBCCE;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 16px;
+        border-radius: 4px;
       }
       #tool-holder {
-        padding-top: 20px;
+        padding-top: 16px;
         img {
           padding-left: 5px;
         }

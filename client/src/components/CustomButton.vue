@@ -28,9 +28,10 @@
   
 <style lang='scss' scoped>
   #button {
+    user-select: none;
     border-radius: 6px;
     font-weight: 500;
-    transition: filter 0.3s ease;
+    transition: filter 0.2s ease;
     &:hover {
       cursor: pointer;
       filter: brightness(110%);

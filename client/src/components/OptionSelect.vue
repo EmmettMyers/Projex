@@ -1,5 +1,11 @@
 <template>
-    <div id="options" :class="{ 'center-horiz': true, 'vert-scroll': vertScroll }">
+    <div 
+      id="options" 
+      :class="{ 'center-horiz': true, 
+                'vert-scroll': vertScroll, 
+                'modal-view': inModal
+              }"
+    >
       <div id="top-row">
         <div id="title">{{ title }}</div>
         <div id="addedInfo" v-if="additionalInfo">* {{ additionalInfo }}</div>
@@ -25,7 +31,7 @@
   
   export default defineComponent({
     name: 'OptionSelect',
-    props: ['title', 'options', 'additionalInfo', 'custom', 'vertScroll'],
+    props: ['title', 'options', 'additionalInfo', 'custom', 'vertScroll', 'inModal'],
     components: { CustomOption },
     data() {
       return {
@@ -59,6 +65,14 @@
       .option-box {
         margin-bottom: 10px !important;
       }
+    }
+  }
+  .modal-view {
+    #top-row {
+      width: 64vw !important;
+    }
+    #box {
+      width: 62vw !important;
     }
   }
   #options {

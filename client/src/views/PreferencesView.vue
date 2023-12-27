@@ -1,4 +1,9 @@
 <template>
+  <AddPreferenceModal 
+    v-if="modalOpen" 
+    :title="modalTitle"
+    :closeModal="closeAddModal"
+  />
   <div>
     <NavBar />
     <div id="preferences">
@@ -36,16 +41,38 @@
         />
       </div>
       <PageHeader :title="pageTitle" :description="pageDescription" />
-      <PreferenceBar title="Project Interests" :options="projectInterests" :editMode="editMode" />
-      <PreferenceBar title="Tools Known" :options="toolsKnown" :editMode="editMode" additionalInfo="B: beginner, I: intermediate, A: advanced" />
-      <PreferenceBar title="Tools Desired To Learn" :editMode="editMode" :options="toolsDesiredToLearn" />
-      <PreferenceBar title="Topic Interests" :editMode="editMode" :options="topicInterests" />
+      <PreferenceBar 
+        title="Project Interests" 
+        :options="projectInterests" 
+        :editMode="editMode" 
+        :openModalParent="openAddModal"
+      />
+      <PreferenceBar 
+        title="Tools Known" 
+        :options="toolsKnown" 
+        :editMode="editMode" 
+        additionalInfo="B: beginner, I: intermediate, A: advanced" 
+        :openModalParent="openAddModal"
+      />
+      <PreferenceBar 
+        title="Tools Desired To Learn" 
+        :editMode="editMode" 
+        :options="toolsDesiredToLearn"
+        :openModalParent="openAddModal"
+      />
+      <PreferenceBar 
+        title="Topic Interests" 
+        :editMode="editMode" 
+        :options="topicInterests" 
+        :openModalParent="openAddModal"
+      />
       <div style="height: 60px"></div>
     </div>
   </div>
 </template>
   
 <script lang="ts">
+  import AddPreferenceModal from '@/components/AddPreferenceModal.vue';
   import CustomButton from '@/components/CustomButton.vue';
   import NavBar from '@/components/NavBar.vue';
   import PageHeader from '@/components/PageHeader.vue';
@@ -55,7 +82,7 @@
   
   export default defineComponent({
     name: 'PreferencesView',
-    components: { NavBar, PageHeader, PreferenceBar, CustomButton },
+    components: { NavBar, PageHeader, PreferenceBar, CustomButton, AddPreferenceModal },
     data() {
       return {
         pageTitle: "Preferences",
@@ -65,9 +92,18 @@
         toolsKnown: toolsKnown,
         toolsDesiredToLearn: toolsDesiredToLearn,
         topicInterests: topicInterests,
+        modalOpen: false,
+        modalTitle: "",
       };
     },
     methods: {
+      openAddModal(title: string) {
+        this.modalOpen = true;
+        this.modalTitle = title;
+      },
+      closeAddModal() {
+        this.modalOpen = false;
+      },
       toggleEditMode() {
         this.editMode = !this.editMode;
       },

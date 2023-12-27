@@ -21,9 +21,13 @@
     methods: {
       createOption() {
         if (this.section == 'Tools'){
-          tools.value.unshift(this.customOptionValue);
+          if (!tools.value?.includes(this.customOptionValue)){
+            tools.value?.unshift(this.customOptionValue);
+          }
         } else if (this.section == 'Topics'){
-          topics.value.unshift(this.customOptionValue);
+          if (!topics.value?.includes(this.customOptionValue)){
+            topics.value?.unshift(this.customOptionValue);
+          }
         }
         this.addOption(this.customOptionValue);
         this.customOptionValue = '';

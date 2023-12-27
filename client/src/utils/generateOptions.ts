@@ -1,20 +1,20 @@
 import { ref } from 'vue';
 
-export const types = ref([
+export const types = ref<string[]>([
     'Website', 'Mobile App', 'Game', 'Desktop App', 'Data Analysis', 'Machine Learning', 
     'Artificial Intelligence', 'API Development', 'Database Management', 'Blockchain', 
     'Automation', 'Virtual Reality', 'Cloud Computing', 'Computer Vision'
 ]);
 
-export const difficulties = ref([
+export const difficulties = ref<string[]>([
     'Starter', 'Learning Curve', 'Intermediate', 'Challenging', 'Advanced'
 ]);
 
-export const times = ref([
+export const times = ref<string[]>([
     '1-3 Days', '1 Week', '2-3 Weeks', '1 Month', '2-3 Months', '4-6 Months', '7+ Months'
 ]);
 
-export const tools = ref();
+export const tools = ref<string[]>();
 
 export const resetTools = () => {
     tools.value = [
@@ -25,7 +25,7 @@ export const resetTools = () => {
     ];
 }
 
-export const topics = ref();
+export const topics = ref<string[]>();
 
 export const resetTopics = () => {
     topics.value = [
