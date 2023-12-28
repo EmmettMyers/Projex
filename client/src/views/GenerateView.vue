@@ -33,7 +33,6 @@
     import PageHeader from '@/components/PageHeader.vue';
     import { types, difficulties, times, tools, topics, resetTools, resetTopics }  from '@/utils/generateOptions';
     import { defineComponent } from 'vue';
-    import axios from 'axios';
 
     export default defineComponent({
         name: 'GenerateView',
@@ -54,16 +53,9 @@
                 this.$router.push('/generated');
             },
         },
-        async mounted() {
+        mounted() {
             resetTools();
             resetTopics();
-
-            try {
-                const response = await axios.get('http://127.0.0.1:8000/members/');
-                alert(response.data);
-            } catch (error) {
-                alert('Error fetching items');
-            }
         }
     });
 </script>
