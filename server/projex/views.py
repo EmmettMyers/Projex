@@ -6,8 +6,8 @@ from .serializer import UserSerializer, PreferenceSerializer, GenerationSerializ
 from .models import User, Preference, Generation, SavedProject
 from utils import *
 
-url = "https://hjymcwxdsalayjcsdvkt.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqeW1jd3hkc2FsYXlqY3Nkdmt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDMxMzkwMTMsImV4cCI6MjAxODcxNTAxM30.kSTCKTL1XIQop5jfow0F03EFY5yM-voLo6vz2qauJS8"
+url = {URL}
+key = {KEY}
 supabase = create_client(url, key)
 
 def add_new_user(request):
@@ -44,8 +44,8 @@ def update_preferences(request):
 def get_project_generations(request):
     user_id = get_user_id(request.email)
     preferences = get_preferences(request)
-    options = request.options()
-    generated_projects = generate_projects(preferences, options);
+    options = request.options
+    generated_projects = generate_projects(preferences, options)
     for project in generated_projects:
         add_generation(user_id, project)
     return JsonResponse(generated_projects)
@@ -53,11 +53,11 @@ def get_project_generations(request):
 def add_generation(user_id, project):
     data, count = supabase.table('generations').insert({
         "user_id": user_id,
-        "title": project.title, 
-        "description": project.description, 
-        "tools": project.tools,
-        "difficulty": project.difficulty,
-        "time": project.time
+        "title": project['Title'], 
+        "description": project['Description'], 
+        "tools": project['Coding Tools'],
+        "difficulty": project['Difficulty'],
+        "time": project['Time']
     }).execute()
     return JsonResponse(data)
 
