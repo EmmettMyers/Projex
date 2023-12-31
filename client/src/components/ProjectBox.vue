@@ -5,13 +5,19 @@
                 <div id="top-row">
                     <div id="name">{{ project.name }}</div>
                     <div id="divider"></div>
-                    <div id="tool-holder" v-for="(tool, index) in project.tools" :key="index">
+                    <div 
+                        id="tool-holder" 
+                        v-for="(tool, index) in project.tools" 
+                        @mouseover="setTooltip(index)"
+                        @mouseout="setTooltip(-1)" :key="index"
+                    >
                         <img 
-                            :src="require(`@/assets/tools/${tool.logo}`)" 
-                            :alt="tool.name" 
-                            width="35" 
-                            height="35" 
+                        :src="require(`@/assets/tools/${tool.toLowerCase()}.png`)" 
+                        :alt="tool" 
+                        width="35" 
+                        height="35"
                         />
+                        <div class="tooltip" v-if="tooltipIndex === index">{{ tool }}</div>
                     </div>
                     <div id="divider"></div>
                     <div style="margin-left: 5px;">
@@ -72,7 +78,15 @@
         name: 'ProjectBox',
         components: { CustomButton },
         props: ['project'],
+        data() {
+            return {
+                tooltipIndex: -1
+            };
+        },
         methods: {
+            setTooltip(index: number) {
+                this.tooltipIndex = index;
+            },
             saveProject() {
                 //
             },
@@ -84,6 +98,17 @@
 </script>
     
 <style lang='scss' scoped>
+    .tooltip {
+        position: absolute;
+        background: #313235;
+        color: white;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 6px;
+        font-size: 18px;
+    }
     #box {
         background: white;
         border: solid 2px #313235;

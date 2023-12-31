@@ -4,15 +4,10 @@ interface Project {
     description: string;
     difficulty: string;
     time: string;
-    tools: Tool[];
+    tools: string[];
     image: string;
     code?: Codebase;
     saved?: boolean;
-}
-
-interface Tool {
-    name: string;
-    logo: string;
 }
 
 interface Codebase {
