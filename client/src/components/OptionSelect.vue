@@ -28,10 +28,11 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import CustomOption from './CustomOption.vue';
+  import { add_preference } from '@/utils/preferences';
   
   export default defineComponent({
     name: 'OptionSelect',
-    props: ['title', 'options', 'additionalInfo', 'custom', 'vertScroll', 'inModal'],
+    props: ['title', 'options', 'additionalInfo', 'custom', 'vertScroll', 'inModal', 'parentSelectedSet'],
     components: { CustomOption },
     data() {
       return {
@@ -48,6 +49,9 @@
           this.selectedOptions.push(option);
         } else {
           this.selectedOptions.splice(index, 1);
+        }
+        if (this.inModal) {
+          this.parentSelectedSet(this.selectedOptions);
         }
       },
     },

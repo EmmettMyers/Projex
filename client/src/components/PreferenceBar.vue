@@ -18,10 +18,10 @@
     <div id="box" class="center-vert">
       <div 
         class="option-box center-vert" 
-        :class="{ 'delete-border': editMode }" 
+        :class="{ 'delete-border': editMode }"
         v-for="option in options" 
         :key="option"
-        @click="deletePreference"
+        @click="deletePreference(option)"
       >
         <div id="option-txt">{{ option }}</div>
         <div v-if="editMode" id="delete-sign">-</div>
@@ -33,6 +33,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import CustomButton from './CustomButton.vue';
+  import { remove_preference } from '@/utils/preferences';
   
   export default defineComponent({
     name: 'PreferenceBar',
@@ -42,8 +43,8 @@
       openAddModal() {
         this.openModalParent(this.title);
       },
-      deletePreference() {
-        //
+      deletePreference(option: string) {
+        remove_preference(this.title, option);
       }
     },
 });

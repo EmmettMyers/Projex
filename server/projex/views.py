@@ -4,42 +4,68 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 from .serializer import UserSerializer, PreferenceSerializer, GenerationSerializer, SavedProjectSerializer
 from .models import User, Preference, Generation, SavedProject
-from utils import *
+from .utils import *
 
 supabase_url = {URL}
 supabase_key = {KEY}
 supabase = create_client(supabase_url, supabase_key)
 
+@csrf_exempt
+def connection_test(request):
+    return HttpResponse("Connected")
+
+@csrf_exempt
 def add_new_user(request):
-    # add user to users table
-    data, count = supabase.table('users').insert({
-        "first_name": request.first_name, 
-        "last_name": request.last_name, 
-        "email": request.email
-    }).execute()
-    # add user to preferences table
-    user_id = data[1][0]['id']
-    data, count = supabase.table('preferences').insert({
-        "user_id": user_id,
-        "project_interests": [''], 
-        "tools_known": [''], 
-        "tools_desired_to_learn": [''],
-        "topic_interests": [''],
-    }).execute()
-    return JsonResponse(data)
+    data = json.loads(request.body)
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    email = data.get('email')
+    # check if user is new to site
+    if (is_user_new(supabase, email)):
+        # add user to users table
+        data, count = supabase.table('users').insert({
+            "first_name": first_name, 
+            "last_name": last_name, 
+            "email": email
+        }).execute()
+        # add user to preferences table
+        user_id = data[1][0]['id']
+        data, count = supabase.table('preferences').insert({
+            "user_id": user_id,
+            "project_interests": [], 
+            "tools_known": [], 
+            "tools_desired_to_learn": [],
+            "topic_interests": [],
+        }).execute()
+        return JsonResponse(data, safe=False)
+    return HttpResponse("User already exists in database.")
 
+@csrf_exempt
 def get_preferences(request):
-    user_id = get_user_id(request.email)
+    data = json.loads(request.body)
+    email = data.get('email')
+    user_id = get_user_id(supabase, email)
     data, count = supabase.table('preferences').select('*').eq('user_id', user_id).execute()
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
 
+@csrf_exempt
 def update_preferences(request):
-    user_id = get_user_id(request.email)
+    data = json.loads(request.body)
+    email = data.get('email')
+    project_interests = data.get('projectInterests')
+    tools_known = data.get('toolsKnown')
+    tools_desired_to_learn = data.get('toolsDesiredToLearn')
+    topic_interests = data.get('topicInterests')
+    user_id = get_user_id(supabase, email)
     data, count = supabase.table('preferences') \
-        .update(request) \
-        .eq('user_id', user_id) \
+        .update({
+            'project_interests': project_interests,
+            'tools_known': tools_known,
+            'tools_desired_to_learn': tools_desired_to_learn,
+            'topic_interests': topic_interests,
+        }).eq('user_id', user_id) \
         .execute()
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
 
 def get_project_generations(request):
     user_id = get_user_id(request.email)

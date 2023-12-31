@@ -13,7 +13,7 @@
         @mouseout="setTooltip(-1)" :key="index"
       >
         <img 
-          :src="require(`@/assets/tools/${tool.toLowerCase()}.png`)" 
+          :src="getToolImageSrc(tool)" 
           :alt="tool" 
           style="height: 25px; width: auto;"
         />
@@ -64,7 +64,14 @@
     methods: {
       setTooltip(index: number) {
         this.tooltipIndex = index;
-      }
+      },
+      getToolImageSrc(tool: string) {
+        try {
+          return require(`@/assets/tools/${tool.toLowerCase()}.png`);
+        } catch (error) {
+          return require(`@/assets/tools/unknown.png`);
+        }
+      },
     }
   });
 </script>

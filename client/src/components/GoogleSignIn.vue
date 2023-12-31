@@ -8,18 +8,25 @@
 </template>
 
 <script lang="ts">
-import { initGooglePopup } from '@/utils/supabase';
-import { defineComponent } from 'vue';
+  import { initGooglePopup } from '@/utils/supabase';
+  import axios from 'axios';
+  import { defineComponent } from 'vue';
 
-export default defineComponent({
-  name: 'GoogleSignIn',
-  methods: {
-    signIn() {
-      this.$router.push('/home');
-      //initGooglePopup();
+  export default defineComponent({
+    name: 'GoogleSignIn',
+    methods: {
+      async signIn() {
+        //initGooglePopup();
+        const user_data = {
+          email: "emmettleemyers@gmail.com",
+          first_name: "Emmett",
+          last_name: "Myers",
+        };
+        const response = await axios.post('http://127.0.0.1:8000/add_new_user/', user_data);
+        this.$router.push('/home');
+      }
     }
-  }
-});
+  });
 </script>
 
 <style lang='scss' scoped>

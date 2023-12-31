@@ -6,7 +6,14 @@ import json
 openai_org = {ORG}
 openai_key = {KEY}
 
-def get_user_id(email):
+def is_user_new(supabase, email):
+    data, count = supabase.table('users') \
+        .select('id') \
+        .eq('email', email) \
+        .execute()
+    return True if len(data[1]) == 0 else False
+
+def get_user_id(supabase, email):
     data, count = supabase.table('users') \
         .select('id') \
         .eq('email', email) \
@@ -14,7 +21,7 @@ def get_user_id(email):
     id = data[1][0]['id']
     return id
 
-def get_generation_id(user_id, title, description):
+def get_generation_id(supabase, user_id, title, description):
     data, count = supabase.table('generations') \
         .select('id') \
         .eq('user_id', user_id) \

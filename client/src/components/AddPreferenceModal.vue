@@ -3,7 +3,13 @@
         <div @click.stop id="modal">
             <div @click="closeModal" id="exit">x</div>
             <div id="title">Add Preferences <span> - {{ title }}</span></div>
-            <OptionSelect :title="title" :options="modalOptions" vert-scroll="true" inModal="true" />
+            <OptionSelect 
+                :title="title" 
+                :options="modalOptions" 
+                vertScroll="true" 
+                inModal="true" 
+                :parentSelectedSet="setSelectedOption"
+            />
             <div id="btn-layer">
                 <div id="btn-holder">
                     <CustomButton 
@@ -27,6 +33,7 @@
     import OptionSelect from './OptionSelect.vue';
     import { types, tools, topics, resetTools, resetTopics }  from '@/utils/generateOptions';
     import CustomButton from './CustomButton.vue';
+    import { add_preference } from '@/utils/preferences';
 
     export default defineComponent({
         name: 'AddPreferenceModal',
@@ -34,12 +41,18 @@
         components: { CustomButton, OptionSelect },
         data() {
             return {
-                modalOptions: types.value
+                modalOptions: types.value,
+                selectedOptions: ['']
             };
         },
         methods: {
+            setSelectedOption(selectedOptions: string[]) {
+                this.selectedOptions = selectedOptions;
+            },
             addPreferences() {
-                //
+                for (const preference of this.selectedOptions){
+                    add_preference(this.title, preference);
+                }
                 this.closeModal();
             }
         },

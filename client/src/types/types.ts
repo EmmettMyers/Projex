@@ -24,3 +24,10 @@ interface File {
     title: string;
     contents: string;
 }
+
+interface Preferences {
+    projectInterests: string[];
+    toolsKnown: string[];
+    toolsDesiredToLearn: string[];
+    topicInterests: string[];
+}

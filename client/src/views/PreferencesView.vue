@@ -21,7 +21,7 @@
         />
         <CustomButton
           v-if="editMode"
-          @click="toggleEditMode"
+          @click="cancelChanges"
           text="Cancel" 
           backColor="#E22C2C" 
           textColor="#FDEBEB" 
@@ -43,13 +43,13 @@
       <PageHeader :title="pageTitle" :description="pageDescription" />
       <PreferenceBar 
         title="Project Interests" 
-        :options="projectInterests" 
+        :options="preferences.projectInterests" 
         :editMode="editMode" 
         :openModalParent="openAddModal"
       />
       <PreferenceBar 
         title="Tools Known" 
-        :options="toolsKnown" 
+        :options="preferences.toolsKnown" 
         :editMode="editMode" 
         additionalInfo="B: beginner, I: intermediate, A: advanced" 
         :openModalParent="openAddModal"
@@ -57,13 +57,13 @@
       <PreferenceBar 
         title="Tools Desired To Learn" 
         :editMode="editMode" 
-        :options="toolsDesiredToLearn"
+        :options="preferences.toolsDesiredToLearn"
         :openModalParent="openAddModal"
       />
       <PreferenceBar 
         title="Topic Interests" 
         :editMode="editMode" 
-        :options="topicInterests" 
+        :options="preferences.topicInterests" 
         :openModalParent="openAddModal"
       />
       <div style="height: 60px"></div>
@@ -77,7 +77,7 @@
   import NavBar from '@/components/NavBar.vue';
   import PageHeader from '@/components/PageHeader.vue';
   import PreferenceBar from '@/components/PreferenceBar.vue';
-  import { projectInterests, toolsKnown, toolsDesiredToLearn, topicInterests }  from '@/utils/preferences';
+  import { cancel_preferences_changes, preferences, preset_preferences, save_preferences_changes }  from '@/utils/preferences';
   import { defineComponent } from 'vue';
   
   export default defineComponent({
@@ -88,10 +88,7 @@
         pageTitle: "Preferences",
         pageDescription: "Stores your generation preferences to streamline the creation process.",
         editMode: false,
-        projectInterests: projectInterests,
-        toolsKnown: toolsKnown,
-        toolsDesiredToLearn: toolsDesiredToLearn,
-        topicInterests: topicInterests,
+        preferences: preferences,
         modalOpen: false,
         modalTitle: "",
       };
@@ -107,10 +104,17 @@
       toggleEditMode() {
         this.editMode = !this.editMode;
       },
+      cancelChanges() {
+        cancel_preferences_changes();
+        this.toggleEditMode();
+      },
       savePreferences() {
-        //
+        save_preferences_changes();
         this.toggleEditMode();
       }
+    },
+    mounted() {
+      preset_preferences();
     }
   });
 </script>
