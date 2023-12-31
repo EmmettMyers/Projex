@@ -3,6 +3,9 @@ import openai
 import requests
 import json
 
+openai_org = "org-B2VCzC8yPM5DdOCjJC0byQrm"
+openai_key = "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"
+
 def get_user_id(email):
     data, count = supabase.table('users') \
         .select('id') \
@@ -53,8 +56,8 @@ def generate_projects(preferences, options):
     query = query_intro + query_preferences + query_options
 
     # send query to gpt turbo model
-    openai.organization = {ORG}
-    openai.api_key = {KEY}
+    openai.organization = openai_org
+    openai.api_key = openai_key
     openai.Model.list()
     url = "https://api.openai.com/v1/chat/completions"
     headers = {

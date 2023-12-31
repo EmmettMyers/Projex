@@ -19,7 +19,7 @@ export const tools = ref<string[]>();
 export const resetTools = () => {
     tools.value = [
         'Java', 'Python', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Angular', 'Vue', 'Django', 
-        'Node', 'Swift', 'Flask', 'Ruby on Rails', 'GraphQL', 'MongoDB', 'MySQL', 'PostgreSQL', 'Kotlin', 
+        'Node', 'Swift', 'Go', 'Flask', 'Ruby on Rails', 'GraphQL', 'MongoDB', 'MySQL', 'PostgreSQL', 'Kotlin', 
         'React Native', 'AWS', 'Azure', 'Docker', 'Dart', 'Unity', 'Unreal Engine', 'R', 'MATLAB', 'Godot',
         'Power BI', 'Kubernetes'
     ];

@@ -15,8 +15,7 @@
         <img 
           :src="require(`@/assets/tools/${tool.toLowerCase()}.png`)" 
           :alt="tool" 
-          width="25" 
-          height="25"
+          style="height: 25px; width: auto;"
         />
         <div class="tooltip" v-if="tooltipIndex === index">{{ tool }}</div>
       </div>
@@ -124,7 +123,7 @@
     }
     #desc-holder {
       padding-top: 5px;
-      padding-bottom: 15px;
+      padding-bottom: 18px;
       padding-left: 20px;
       padding-right: 20px;
       font-size: 20px;

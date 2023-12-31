@@ -12,10 +12,9 @@
                         @mouseout="setTooltip(-1)" :key="index"
                     >
                         <img 
-                        :src="require(`@/assets/tools/${tool.toLowerCase()}.png`)" 
-                        :alt="tool" 
-                        width="35" 
-                        height="35"
+                            :src="require(`@/assets/tools/${tool.toLowerCase()}.png`)" 
+                            :alt="tool" 
+                            style="height: 35px; width: auto;"
                         />
                         <div class="tooltip" v-if="tooltipIndex === index">{{ tool }}</div>
                     </div>

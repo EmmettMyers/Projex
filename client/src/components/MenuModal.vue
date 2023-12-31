@@ -1,10 +1,10 @@
 <template>
     <div id="menu">
-        <div @click="enterGenerate">generate</div>
-        <div @click="enterPool">project pool</div>
-        <div @click="enterSaved">saved</div>
-        <div @click="enterPreferences">preferences</div>
-        <div @click="logOut">log out</div>
+        <div @click="navigate('generate')">generate</div>
+        <div @click="navigate('pool')">project pool</div>
+        <div @click="navigate('saved')">saved</div>
+        <div @click="navigate('preferences')">preferences</div>
+        <div @click="navigate('login')">log out</div>
     </div>
 </template>
     
@@ -14,20 +14,8 @@
     export default defineComponent({
         name: 'MenuModal',
         methods: {
-            enterGenerate() {
-                this.$router.push('/generate');
-            },
-            enterPool() {
-                this.$router.push('/pool');
-            },
-            enterSaved() {
-                this.$router.push('/saved');
-            },
-            enterPreferences() {
-                this.$router.push('/preferences');
-            },
-            logOut() {
-                this.$router.push('/login');
+            navigate(page: string) {
+                this.$router.push(page);
             },
         },
     });
@@ -36,7 +24,7 @@
 <style lang='scss' scoped>
     #menu {
         z-index: 5;
-        height: 160px;
+        height: 156px;
         width: 130px;
         position: absolute;
         right: 0;

@@ -6,9 +6,9 @@ from .serializer import UserSerializer, PreferenceSerializer, GenerationSerializ
 from .models import User, Preference, Generation, SavedProject
 from utils import *
 
-url = {URL}
-key = {KEY}
-supabase = create_client(url, key)
+supabase_url = "https://hjymcwxdsalayjcsdvkt.supabase.co"
+supabase_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqeW1jd3hkc2FsYXlqY3Nkdmt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDMxMzkwMTMsImV4cCI6MjAxODcxNTAxM30.kSTCKTL1XIQop5jfow0F03EFY5yM-voLo6vz2qauJS8"
+supabase = create_client(supabase_url, supabase_key)
 
 def add_new_user(request):
     # add user to users table
