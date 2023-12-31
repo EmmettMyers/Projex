@@ -6,10 +6,16 @@ import SavedView from '@/views/SavedView.vue'
 import PoolView from '@/views/PoolView.vue'
 import GenerateView from '@/views/GenerateView.vue'
 import GeneratedView from '@/views/GeneratedView.vue'
+import LoadingViewVue from '@/views/LoadingView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    name: 'loading',
+    component: LoadingViewVue
+  },
+  {
+    path: '/login',
     name: 'login',
     component: LoginView
   },
