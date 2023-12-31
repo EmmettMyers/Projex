@@ -3,8 +3,8 @@ import openai
 import requests
 import json
 
-openai_org = "org-B2VCzC8yPM5DdOCjJC0byQrm"
-openai_key = "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"
+openai_org = {ORG}
+openai_key = {KEY}
 
 def get_user_id(email):
     data, count = supabase.table('users') \
