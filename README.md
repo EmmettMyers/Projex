@@ -2,17 +2,15 @@
 
 [Live Demo](https://drive.google.com/file/d/1CuL6cXabCZVm2w33mt-Y4uQjUmN8oNns/view)&nbsp;&nbsp;|&nbsp;&nbsp;<i>Created: Winter Break 2023 (College Sophomore)</i>
 
-<div style="display: flex; justify-content: center;">
- <img src="client/src/assets/examples/projex2.png" style="width: 400px" />
- <img src="client/src/assets/examples/projex3.png" style="width: 400px" />
-</div>
-<div style="display: flex; justify-content: center;">
- <img src="client/src/assets/examples/projex4.png" style="width: 400px" />
- <img src="client/src/assets/examples/projex5.png" style="width: 400px" />
-</div>
-
 <br/>
 <b>Projex is a web app that generates coding personal project ideas based on user preferences, skills, and interests.</b>
+<br/>
+
+<img src="client/src/assets/examples/projex2.png" style="width: 600px" />
+<img src="client/src/assets/examples/projex3.png" style="width: 600px" />
+<img src="client/src/assets/examples/projex4.png" style="width: 600px" />
+<img src="client/src/assets/examples/projex5.png" style="width: 600px" />
+
 <br/><br/>
 
 Some of its main sections include:
