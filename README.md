@@ -6,9 +6,9 @@
 <img src="client/src/assets/examples/projex4.png" style="width: 600px" />
 <img src="client/src/assets/examples/projex5.png" style="width: 600px" />
 
-<br/><br/>
+<br/>
 <b>Projex is a web app that generates coding personal project ideas based on user preferences, skills, and interests.</b>
-<br/><br/>
+<br/>
 
 Some of its main sections include:
  - <strong>Dashboard</strong>, which includes some of the user's past generated projects, navigation to the main pages, and a short statement of the app's purpose
