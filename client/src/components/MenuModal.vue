@@ -4,11 +4,12 @@
         <div @click="navigate('pool')">project pool</div>
         <div @click="navigate('saved')">saved</div>
         <div @click="navigate('preferences')">preferences</div>
-        <div @click="navigate('login')">log out</div>
+        <div @click="logout()">log out</div>
     </div>
 </template>
     
 <script lang="ts">
+    import { logout } from '@/utils/authentication';
     import { defineComponent } from 'vue';
     
     export default defineComponent({
@@ -17,6 +18,10 @@
             navigate(page: string) {
                 this.$router.push(page);
             },
+            async logout() {
+                await logout();
+                this.navigate('login');
+            }
         },
     });
 </script>

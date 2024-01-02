@@ -22,7 +22,7 @@ export const get_project_generations = async () => {
         topics: [...selected_options.topics.value],
     }
     const user_data = { 
-        email: "emmettleemyers@gmail.com",
+        email: localStorage.getItem('userEmail'),
         options: parsable_options,
     };
     const response = await axios.post('http://127.0.0.1:8000/get_project_generations/', user_data);

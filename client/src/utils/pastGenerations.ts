@@ -5,7 +5,7 @@ import { ref } from 'vue';
 export const past_generations = ref<Project[]>([]);
 
 export const preset_past_generations = async () => {
-    const user_data = { email: "emmettleemyers@gmail.com" };
+    const user_data = { email: localStorage.getItem('userEmail') };
     const saved_response = await axios.post('http://127.0.0.1:8000/get_saved_projects/', user_data);
     const saved_projects = saved_response.data;
     const response = await axios.post('http://127.0.0.1:8000/get_past_generations/', user_data);

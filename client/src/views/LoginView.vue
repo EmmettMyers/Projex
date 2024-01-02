@@ -17,12 +17,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import GoogleSignIn from '../components/GoogleSignIn.vue';
+import { set_user_email } from '@/utils/authentication';
 
 export default defineComponent({
     name: 'LoginView',
     components: {
         GoogleSignIn
-    }
+    },
 });
 </script>
 

@@ -17,15 +17,11 @@ def connection_test(request):
 @csrf_exempt
 def add_new_user(request):
     data = json.loads(request.body)
-    first_name = data.get('first_name')
-    last_name = data.get('last_name')
     email = data.get('email')
     # check if user is new to site
     if (is_user_new(supabase, email)):
         # add user to users table
         data, count = supabase.table('users').insert({
-            "first_name": first_name, 
-            "last_name": last_name, 
             "email": email
         }).execute()
         # add user to preferences table

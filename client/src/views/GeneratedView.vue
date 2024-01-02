@@ -26,6 +26,11 @@
                 generatedProjects: generated_projects
             };
         },
+        mounted() {
+            if (this.generatedProjects.length == 0){
+                this.$router.push("/home");
+            }
+        }
     });
 </script>
     

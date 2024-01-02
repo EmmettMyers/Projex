@@ -17,7 +17,7 @@ let past_preferences = {
 };
 
 export const preset_preferences = async () => {
-    const user_data = { email: "emmettleemyers@gmail.com" };
+    const user_data = { email: localStorage.getItem('userEmail') };
     const response = await axios.post('http://127.0.0.1:8000/get_preferences/', user_data);
     if (response.data[1].length > 0){
         const data = response.data[1][0];
@@ -52,7 +52,7 @@ export const remove_preference = (section: string, preference: string) => {
 
 export const save_preferences_changes = async () => {
     const user_data = { 
-        email: "emmettleemyers@gmail.com",
+        email: localStorage.getItem('userEmail'),
         projectInterests: [...preferences.projectInterests.value],
         toolsKnown: [...preferences.toolsKnown.value],
         toolsDesiredToLearn: [...preferences.toolsDesiredToLearn.value],

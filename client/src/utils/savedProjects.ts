@@ -6,7 +6,7 @@ export const saved_projects = ref<Project[]>([]);
 
 export const preset_saved_projects = async () => {
     saved_projects.value = []
-    const user_data = { email: "emmettleemyers@gmail.com" };
+    const user_data = { email: localStorage.getItem('userEmail') };
     const response = await axios.post('http://127.0.0.1:8000/get_saved_projects/', user_data);
     // check if there are any saved projects
     if (response.data.length > 0){
@@ -26,7 +26,7 @@ export const preset_saved_projects = async () => {
 
 export const save_project = async (title: string, description: string) => {
     const project_data = { 
-        email: "emmettleemyers@gmail.com",
+        email: localStorage.getItem('userEmail'),
         title: title,
         description: description
     };
@@ -35,7 +35,7 @@ export const save_project = async (title: string, description: string) => {
 
 export const unsave_project = async (title: string, description: string) => {
     const project_data = { 
-        email: "emmettleemyers@gmail.com",
+        email: localStorage.getItem('userEmail'),
         title: title,
         description: description
     };
