@@ -23,6 +23,7 @@
 
 <style lang='scss' scoped>
   #button {
+    z-index: 20;
     width: 450px;
     height: 70px;
     margin-top: 60px;
