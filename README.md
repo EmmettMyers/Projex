@@ -7,7 +7,7 @@
 
 <b>Projex is a web app that generates coding personal project ideas based on user preferences, skills, and interests.</b>
 
-<br>
+
 Some of its main sections include:
  - <strong>Dashboard</strong>, which includes some of the user's past generated projects, navigation to the main pages, and a short statement of the app's purpose
  - <strong>Project Preferences</strong>, which allows the user to store some of their coding traits for more personalized project generations
@@ -16,12 +16,12 @@ Some of its main sections include:
  - <strong>Project Pool</strong>, which allows for greater project discovery by storing unsaved projects generated from other users
  - <strong>Saved Projects</strong>, which stores projects that the user saves from their generations or the project pool
 
-<br>
+
 Additional notes:
  - The OpenAI GPT 3.5 Turbo model is used for project generation
  - Users are authenticated using Supabase Google Single Sign-On
 
-<br>
+
 <b>Tools used:</b>
  - TypeScript - Vue
  - Python - Django
