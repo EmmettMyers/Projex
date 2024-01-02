@@ -15,6 +15,7 @@ Some of its main sections include:
      - Each project idea includes the title, description, coding tools used, estimated time to complete, and estimated difficulty based on user's skills
  - <strong>Project Pool</strong>, which allows for greater project discovery by storing unsaved projects generated from other users
  - <strong>Saved Projects</strong>, which stores projects that the user saves from their generations or the project pool
+
 <br><br>
 Additional notes:
  - The OpenAI GPT 3.5 Turbo model is used for project generation
