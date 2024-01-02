@@ -7,7 +7,7 @@
 <img src="client/src/assets/examples/projex5.png" style="width: 600px" />
 
 <br/>
-<b>Projex is a web app that generates coding personal project ideas based on user preferences, skills, and interests.</b>
+<b>Projex is a web app that uses machine learning to generate coding personal project ideas based on user preferences, skills, and interests.</b>
 <br/><br/>
 
 Some of its main sections include:
