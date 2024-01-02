@@ -9,11 +9,6 @@ export async function init_google_login() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
     });
-    if (error) {
-        console.error('Sign-in error:', error);
-    } else {
-        console.error('Sign-in success. User data:', data);
-    }
 }
 
 export async function logout() {

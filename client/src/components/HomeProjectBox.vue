@@ -11,10 +11,11 @@
           <div id="name">{{ project.name }}</div>
           <div class="tooltip" v-if="tooltipIndex === -1">{{ project.name }}</div>
         </div>
-        <div id="divider"></div>
+        <div v-if="windowWidth > 1300" id="divider"></div>
       </div>
       <div 
         id="tool-holder" 
+        v-if="windowWidth > 1300"
         v-for="(tool, index) in project.tools.slice(0, 4)" 
         @mouseover="setTooltip(index)"
         @mouseout="setTooltip(-2)" 
@@ -33,7 +34,7 @@
           text="Unsave" 
           backColor="#E22C2C" 
           textColor="#FDEBEB" 
-          horizPad="30px" 
+          horizPad="20px" 
           vertPad="6px" 
           fontSize="18px"
           @click="unsaveProject"
@@ -43,7 +44,7 @@
           text="Save" 
           backColor="#328D30" 
           textColor="#D8FFD8" 
-          horizPad="30px" 
+          horizPad="20px" 
           vertPad="6px" 
           fontSize="18px"
           @click="saveProject"
@@ -69,7 +70,8 @@
     components: { CustomButton },
     data() {
       return {
-        tooltipIndex: -2
+        tooltipIndex: -2,
+        windowWidth: window.innerWidth
       };
     },
     methods: {
@@ -93,8 +95,17 @@
       unsaveProject() {
         unsave_project(this.project.name, this.project.description);
         this.project.saved = false;
-      },  
-    }
+      },
+      handleResize() {
+        this.windowWidth = window.innerWidth;
+      }
+      },
+    mounted() {
+      window.addEventListener('resize', this.handleResize);
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.handleResize);
+    },
   });
 </script>
   
@@ -125,13 +136,18 @@
         position: relative;
         padding-left: 20px;
         #name {
-          max-width: 320px;
+          max-width: 18vw;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis; 
           padding-top: 12px;
           font-size: 30px;
           font-weight: 600;
+        }
+        @media (max-width: 1300px) {
+          #name {
+            max-width: 25vw;
+          }
         }
         .tooltip {
           margin-top: 4px;
@@ -157,7 +173,7 @@
         padding-left: 16px;
         margin-top: 8px;
         margin-left: auto;
-        margin-right: 20px;
+        margin-right: 10px;
       }
     }
     #desc-holder {

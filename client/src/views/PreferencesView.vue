@@ -147,7 +147,7 @@
         border: 14px solid #7DBCCE;
         border-right-color: #313235;
         animation: l2 .75s infinite linear;
-        margin-top: 150px;
+        margin-top: 20vh;
       }
       @keyframes l2 {to{transform: rotate(1turn)}}
     }

@@ -72,11 +72,11 @@
     display: flex;
     justify-content: center;
     #left-holder {
-      margin-right: 40px;
-      margin-top: 50px;
-      width: 670px;
+      margin-right: 2vw;
+      margin-top: 6vh;
+      width: 40vw;
       #motto {
-        font-size: 60px;
+        font-size: 3.75vw;
         font-weight: 700;
         line-height: 110%;
         span {
@@ -84,17 +84,17 @@
         }
       }
       #blue-line {
-        width: 615px;
+        width: 96%;
         margin-top: 2px;
         height: 7px;
         background: #7DBCCE;
         border-radius: 4px;
       }
       #past-generations-title {
-        margin-top: 50px;
+        position: absolute;
+        bottom: 60vh;
         font-size: 30px;
         font-weight: 500;
-        padding-bottom: 15px;
       }
       #loader-holder {
         #loader {
@@ -104,14 +104,17 @@
           border: 14px solid #7DBCCE;
           border-right-color: #313235;
           animation: l2 .75s infinite linear;
-          margin-top: 120px;
+          margin-top: 28vh;
         }
         @keyframes l2 {to{transform: rotate(1turn)}}
       }
       #project-holder {
-        height: 440px;
+        height: 58vh;
+        width: 40vw;
         overflow-x: hidden;
         overflow-y: auto;
+        position: absolute;
+        bottom: 0px;
       }
       #project-holder::-webkit-scrollbar {
         width: 6px;
@@ -128,9 +131,9 @@
       }
     }
     #right-holder {
-      margin-left: 50px;
-      margin-top: 50px;
-      width: 620px;
+      margin-left: 2vw;
+      margin-top: 7vh;
+      width: 40vw;
       #pref-btn, #gen-btn, #saved-btn, #pool-btn {
         background: #7DBCCE;
         border-radius: 10px;
@@ -143,22 +146,22 @@
         }
       }
       #pref-btn {
-        height: 100px;
-        font-size: 30px;
+        height: 14vh;
+        font-size: 2vw;
       }
       #gen-btn {
         margin-top: 10px;
-        height: 300px;
-        font-size: 48px;
+        height: 38vh;
+        font-size: 3.1vw;
       }
       #bottom-btn-holder {
         display: flex;
         justify-content: space-between;
         margin-top: 10px;
         #saved-btn, #pool-btn {
-          height: 200px;
-          font-size: 30px;
-          width: 305px;
+          height: 24vh;
+          font-size: 2vw;
+          width: 49.15%;
         }
       }
     }

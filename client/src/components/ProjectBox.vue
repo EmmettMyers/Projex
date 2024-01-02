@@ -26,8 +26,8 @@
                         />
                         <div class="tooltip" v-if="tooltipIndex === index">{{ tool }}</div>
                     </div>
-                    <div id="divider"></div>
-                    <div style="margin-left: 5px;">
+                    <div v-if="windowWidth > 1100" id="divider"></div>
+                    <div v-if="windowWidth > 1100" style="margin-left: 5px;">
                         <div id="difficulty" style="padding-top: 18px;">
                             Relative Difficulty:&nbsp; <span>{{ project.difficulty }}</span>
                         </div>
@@ -36,16 +36,6 @@
                         </div>
                     </div>
                     <div id="btn-holder">
-                        <div id="code-btn" style="margin-left: 10px;">
-                            <CustomButton 
-                                text="Project Tips" 
-                                backColor="#A9B8BC" 
-                                textColor="#313235" 
-                                horizPad="30px" 
-                                vertPad="8px" 
-                                fontSize="18px"
-                            />
-                        </div>
                         <div id="save-btn" style="margin-left: 5px;">
                             <CustomButton 
                                 v-if="project.saved"
@@ -89,7 +79,8 @@
         props: ['project'],
         data() {
             return {
-                tooltipIndex: -2
+                tooltipIndex: -2,
+                windowWidth: window.innerWidth
             };
         },
         methods: {
@@ -114,6 +105,15 @@
                 unsave_project(this.project.name, this.project.description);
                 this.project.saved = false;
             },
+            handleResize() {
+                this.windowWidth = window.innerWidth;
+            }
+        },
+        mounted() {
+            window.addEventListener('resize', this.handleResize);
+        },
+        beforeDestroy() {
+            window.removeEventListener('resize', this.handleResize);
         },
     });
 </script>
