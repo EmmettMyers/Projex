@@ -31,6 +31,10 @@ def user_id_to_generation_id(supabase, user_id, title, description):
     id = data[1][0]['id']
     return id
 
+def project_has_required_keys(project):
+    required_keys = ["Title", "Description", "Coding Tools", "Difficulty", "Time"]
+    return all(key in project for key in required_keys)
+
 def generate_projects(preferences, options):
     # developer preferences, string form
     project_interests = ", ".join(preferences['project_interests'])
@@ -46,7 +50,7 @@ def generate_projects(preferences, options):
     topics = ", ".join(options['topics'])
 
     # gpt query
-    query_intro = "You are the engine behind an application that generates personal coding project ideas for aspiring software engineers who want unique and interesting project ideas. The users have their preferences saved, but also select options for the current app types they want to generate. Lean on their options selected, but if you need extra inspiration use their preferences. Come up with a list of 10 personal coding project ideas using their preferences and options selected. For each project idea, layout the 'Title', 'Coding Tools', a 1 paragraph 'Description', the 'Difficulty' based on their developer tools known and the tools of the current project, and estimated 'Time' based on their skills. Make sure the project ideas are unique and stand out in a resume as interesting and personalized."
+    query_intro = "You are the engine behind an application that generates personal coding project ideas for aspiring software engineers who want unique and interesting project ideas. The users have their preferences saved, but also select options for the current app types they want to generate. Lean on their options selected, but if you need extra inspiration use their preferences. Come up with a list of 10 personal coding project ideas using their preferences and options selected. For each project idea, layout the 'Title' (should be short, unique, and catchy), 'Coding Tools', a 1 paragraph 'Description', the 'Difficulty' based on their developer tools known and the tools of the current project, and estimated 'Time' based on their skills. Make sure the project ideas are unique and stand out in a resume as interesting and personalized."
     query_preferences = '\n\nDeveloper Preferences' + \
                         '\n---------------------' + \
                         '\nDeveloper broad project interests: ' + project_interests + \

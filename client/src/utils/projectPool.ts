@@ -1,6 +1,7 @@
 import { Project } from '@/types/types';
 import axios from 'axios';
 import { ref } from 'vue';
+import { shuffleArray } from './pastGenerations';
 
 export const project_pool = ref<Project[]>([]);
 
@@ -32,6 +33,7 @@ export const preset_project_pool = async () => {
             }
             generations.push(generation);
         }
-        project_pool.value = generations;
+        const shuffled_generations = shuffleArray(generations);
+        project_pool.value = shuffled_generations;
     }
 }

@@ -15,7 +15,7 @@
       </div>
       <div 
         id="tool-holder" 
-        v-for="(tool, index) in project.tools" 
+        v-for="(tool, index) in project.tools.slice(0, 4)" 
         @mouseover="setTooltip(index)"
         @mouseout="setTooltip(-2)" 
         :key="index"
@@ -78,6 +78,9 @@
       },
       getToolImageSrc(tool: string) {
         try {
+          if (tool == 'Next.js'){
+            tool = 'Next'
+          }
           return require(`@/assets/tools/${tool.toLowerCase()}.png`);
         } catch (error) {
           return require(`@/assets/tools/unknown.png`);
@@ -122,7 +125,7 @@
         position: relative;
         padding-left: 20px;
         #name {
-          max-width: 330px;
+          max-width: 320px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis; 
@@ -151,6 +154,7 @@
         }
       }
       #btn-holder {
+        padding-left: 16px;
         margin-top: 8px;
         margin-left: auto;
         margin-right: 20px;

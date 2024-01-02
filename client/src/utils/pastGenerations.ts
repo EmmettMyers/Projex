@@ -39,13 +39,7 @@ export const preset_past_generations = async () => {
     }
 }
 
-const getFirstSentence = (paragraph: string) => {
-    const sentences = paragraph.split(/\.|\?|!/);
-    const firstSentence = sentences[0].trim();
-    return firstSentence + ".";
-}
-
-const shuffleArray = (array: Project[]) => {
+export const shuffleArray = (array: Project[]) => {
     const shuffledArray = [...array];
     shuffledArray.sort(() => Math.random() - 0.5);
     return shuffledArray;

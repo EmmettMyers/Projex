@@ -35,38 +35,39 @@
                             Estimated Time:&nbsp; <span>{{ project.time }}</span>
                         </div>
                     </div>
-                    <div id="divider"></div>
-                    <div id="code-btn" style="margin-left: 10px;">
-                        <CustomButton 
-                            text="Starter Code" 
-                            backColor="#A9B8BC" 
-                            textColor="#313235" 
-                            horizPad="30px" 
-                            vertPad="8px" 
-                            fontSize="18px"
-                        />
-                    </div>
-                    <div id="save-btn" style="margin-left: 5px;">
-                        <CustomButton 
-                            v-if="project.saved"
-                            text="Unsave" 
-                            backColor="#E22C2C" 
-                            textColor="#FDEBEB" 
-                            horizPad="30px" 
-                            vertPad="8px" 
-                            fontSize="18px"
-                            @click="unsaveProject"
-                        />
-                        <CustomButton 
-                            v-else
-                            text="Save" 
-                            backColor="#328D30" 
-                            textColor="#D8FFD8" 
-                            horizPad="30px" 
-                            vertPad="8px" 
-                            fontSize="18px"
-                            @click="saveProject"
-                        />
+                    <div id="btn-holder">
+                        <div id="code-btn" style="margin-left: 10px;">
+                            <CustomButton 
+                                text="Project Tips" 
+                                backColor="#A9B8BC" 
+                                textColor="#313235" 
+                                horizPad="30px" 
+                                vertPad="8px" 
+                                fontSize="18px"
+                            />
+                        </div>
+                        <div id="save-btn" style="margin-left: 5px;">
+                            <CustomButton 
+                                v-if="project.saved"
+                                text="Unsave" 
+                                backColor="#E22C2C" 
+                                textColor="#FDEBEB" 
+                                horizPad="30px" 
+                                vertPad="8px" 
+                                fontSize="18px"
+                                @click="unsaveProject"
+                            />
+                            <CustomButton 
+                                v-else
+                                text="Save" 
+                                backColor="#328D30" 
+                                textColor="#D8FFD8" 
+                                horizPad="30px" 
+                                vertPad="8px" 
+                                fontSize="18px"
+                                @click="saveProject"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div id="desc-holder">
@@ -97,6 +98,9 @@
             },
             getToolImageSrc(tool: string) {
                 try {
+                    if (tool == 'Next.js'){
+                        tool = 'Next'
+                    }
                     return require(`@/assets/tools/${tool.toLowerCase()}.png`);
                 } catch (error) {
                     return require(`@/assets/tools/unknown.png`);
@@ -140,21 +144,20 @@
             width: 100%;
             #top-row {
                 display: flex;
+                justify-content: flex-start;
                 width: 100%;
-                #code-btn, #save-btn {
-                    padding-top: 20px;
-                }
                 #name-holder {
                     position: relative;
                     padding-left: 36px;
                     #name {
-                        max-width: 460px;
+                        max-width: 500px;
                         padding-top: 16px;
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis; 
                         font-size: 40px;
                         font-weight: 600;
+                        user-select: none;
                     }
                     .tooltip {
                         margin-top: 6px;
@@ -165,8 +168,8 @@
                     height: 40px;
                     background: #7DBCCE;
                     margin-top: 20px;
-                    margin-left: 30px;
-                    margin-right: 20px;
+                    margin-left: 25px;
+                    margin-right: 15px;
                     border-radius: 4px;
                 }
                 #tool-holder {
@@ -177,9 +180,10 @@
                     }
                 }
                 #btn-holder {
-                    margin-top: 12px;
+                    margin-top: 20px;
                     margin-left: auto;
                     margin-right: 20px;
+                    display: flex;
                 }
                 #difficulty, #time {
                     font-size: 18px;

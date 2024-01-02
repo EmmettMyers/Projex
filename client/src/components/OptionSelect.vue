@@ -30,7 +30,7 @@
   import CustomOption from './CustomOption.vue';
   import { add_option, remove_option } from '@/utils/generatedProjects';
   import { formatToCamelCase, preferences } from '@/utils/preferences';
-  import { types, difficulties, times, tools, topics }  from '@/utils/generateOptions';
+  import { types, difficulties, times, tools, topics, reset_tools, reset_topics }  from '@/utils/generateOptions';
   
   export default defineComponent({
     name: 'OptionSelect',
@@ -45,6 +45,9 @@
     methods: {
       addOption(option: string){
         this.selectedOptions.unshift(option);
+        if (this.inModal === undefined) {
+          add_option(this.title, option);
+        }
       },
       optionClicked(option: string) {
         // change local selectedOptions
@@ -101,6 +104,9 @@
       }
     },
     mounted() {
+      this.selectedOptions = []
+      reset_tools();
+      reset_topics();
       this.setOptions();
       if (this.inModal){
         this.removeExistingPreferencesFromOptions();

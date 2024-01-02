@@ -20,8 +20,8 @@ export const reset_tools = () => {
     tools.value = [
         'Java', 'Python', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Angular', 'Vue', 'Django', 
         'Node', 'Swift', 'Go', 'Flask', 'Ruby on Rails', 'GraphQL', 'MongoDB', 'MySQL', 'PostgreSQL', 'Kotlin', 
-        'React Native', 'AWS', 'Azure', 'Docker', 'Dart', 'Unity', 'Unreal Engine', 'R', 'MATLAB', 'Godot',
-        'Power BI', 'Kubernetes'
+        'React Native', 'Next.js', 'Nuxt', 'AWS', 'Azure', 'Docker', 'Dart', 'Unity', 'Unreal Engine', 'R', 
+        'MATLAB', 'Godot', 'Power BI', 'Kubernetes'
     ];
 }
 

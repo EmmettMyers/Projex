@@ -83,7 +83,11 @@ def get_project_generations(request):
     preferences_data, count = supabase.table('preferences').select('*').eq('user_id', user_id).execute()
     preferences = preferences_data[1][0]
     options = data.get('options')
-    generated_projects = generate_projects(preferences, options)
+    while True:
+        generated_projects = generate_projects(preferences, options)
+        # check if all projects have the required keys
+        if all(project_has_required_keys(project) for project in generated_projects):
+            break  # exit the loop
     for project in generated_projects:
         add_generation(user_id, project)
     return JsonResponse(generated_projects, safe=False)
@@ -114,7 +118,7 @@ def get_saved_projects(request):
             .execute()
         project = data[1][0]
         saved_projects.append(project)
-    return JsonResponse(saved_projects, safe=False)
+    return JsonResponse(saved_projects[::-1], safe=False)
 
 @csrf_exempt
 def add_saved_project(request):
@@ -147,6 +151,15 @@ def delete_saved_project(request):
 
 @csrf_exempt
 def get_project_pool(request):
+    data = json.loads(request.body)
+    email = data.get('email')
+    user_id = email_to_user_id(supabase, email)
+    saved, count = supabase.table('saved_projects').select('generation_id').eq('user_id', user_id).execute()
+    saved_generation_ids = [entry['generation_id'] for entry in saved[1]]
+    project_pool = []
     data, count = supabase.table('generations').select('*').execute()
-    project_pool = data[1][:50]
+    for generation in data[1]:
+        if len(project_pool) <= 50:
+            if generation['id'] not in saved_generation_ids:
+                project_pool.append(generation)
     return JsonResponse(project_pool, safe=False)

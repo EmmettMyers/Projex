@@ -53,8 +53,6 @@
         },
         mounted() {
             reset_selected_options();
-            reset_tools();
-            reset_topics();
         }
     });
 </script>

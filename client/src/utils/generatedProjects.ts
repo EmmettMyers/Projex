@@ -13,6 +13,7 @@ export const selected_options: Options = {
 }
 
 export const get_project_generations = async () => {
+    generated_projects.value = []
     const parsable_options = {
         type: [...selected_options.type.value],
         difficulty: [...selected_options.difficulty.value],
