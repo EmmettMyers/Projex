@@ -4,8 +4,7 @@
             <div @click="closeModal" id="exit">x</div>
             <div id="title">Add Preferences <span> - {{ title }}</span></div>
             <OptionSelect 
-                :title="title" 
-                :options="modalOptions" 
+                :title="title"
                 vertScroll="true" 
                 inModal="true" 
                 :parentSelectedSet="setSelectedOption"
@@ -31,7 +30,7 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import OptionSelect from './OptionSelect.vue';
-    import { types, tools, topics, reset_tools, reset_topics }  from '@/utils/generateOptions';
+    import { reset_tools, reset_topics }  from '@/utils/generateOptions';
     import CustomButton from './CustomButton.vue';
     import { add_preference } from '@/utils/preferences';
 
@@ -41,7 +40,6 @@
         components: { CustomButton, OptionSelect },
         data() {
             return {
-                modalOptions: types.value,
                 selectedOptions: ['']
             };
         },
@@ -59,16 +57,6 @@
         mounted() {
             reset_tools();
             reset_topics();
-            switch (this.title) {
-                case "Project Interests":
-                    this.modalOptions = (types.value ?? []); break;
-                case "Tools Known":
-                    this.modalOptions = (tools.value ?? []); break;
-                case "Tools Desired To Learn":
-                    this.modalOptions = (tools.value ?? []); break;
-                case "Topic Interests":
-                    this.modalOptions = (topics.value ?? []); break;
-            }
         },
     });
 </script>

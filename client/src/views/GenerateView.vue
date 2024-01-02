@@ -3,11 +3,11 @@
         <NavBar />
         <div id="generate">
             <PageHeader :title="pageTitle" :description="pageDescription" />
-            <OptionSelect title="Type" :options="types" vert-scroll="true" />
-            <OptionSelect title="Difficulty" :options="difficulties" additionalInfo="aggregate based on your developer proficiencies" />
-            <OptionSelect title="Time" :options="times" />
-            <OptionSelect title="Tools" :options="tools" custom="true" vert-scroll="true" />
-            <OptionSelect title="Topics" :options="topics" custom="true" vert-scroll="true" />
+            <OptionSelect title="Type" vert-scroll="true" />
+            <OptionSelect title="Difficulty" additionalInfo="aggregate based on your developer proficiencies" />
+            <OptionSelect title="Time" />
+            <OptionSelect title="Tools" custom="true" vert-scroll="true" />
+            <OptionSelect title="Topics" custom="true" vert-scroll="true" />
             <div id="btn-layer">
                 <div id="btn-holder">
                     <CustomButton 
@@ -31,7 +31,7 @@
     import CustomButton from '@/components/CustomButton.vue';
     import OptionSelect from '@/components/OptionSelect.vue';
     import PageHeader from '@/components/PageHeader.vue';
-    import { types, difficulties, times, tools, topics, reset_tools, reset_topics }  from '@/utils/generateOptions';
+    import { reset_tools, reset_topics }  from '@/utils/generateOptions';
     import { defineComponent } from 'vue';
     import { get_project_generations, reset_selected_options } from '@/utils/generatedProjects';
 
@@ -42,11 +42,6 @@
             return {
                 pageTitle: "Generate Project Ideas",
                 pageDescription: "Our artificial intelligence tools will create project ideas based on your preferences and options chosen below.",
-                types: types,
-                difficulties: difficulties,
-                times: times,
-                tools: tools,
-                topics: topics
             };
         },
         methods: {

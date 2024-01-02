@@ -28,16 +28,18 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import CustomOption from './CustomOption.vue';
-  import { add_preference } from '@/utils/preferences';
   import { add_option, remove_option } from '@/utils/generatedProjects';
+  import { formatToCamelCase, preferences } from '@/utils/preferences';
+  import { types, difficulties, times, tools, topics }  from '@/utils/generateOptions';
   
   export default defineComponent({
     name: 'OptionSelect',
-    props: ['title', 'options', 'additionalInfo', 'custom', 'vertScroll', 'inModal', 'parentSelectedSet'],
+    props: ['title', 'additionalInfo', 'custom', 'vertScroll', 'inModal', 'parentSelectedSet'],
     components: { CustomOption },
     data() {
       return {
         selectedOptions: [] as string[],
+        options: [] as string[]
       };
     },
     methods: {
@@ -65,7 +67,45 @@
           this.parentSelectedSet(this.selectedOptions);
         }
       },
+      setOptions() {
+        if (this.inModal){
+          switch (this.title) {
+            case "Project Interests":
+              this.options = (types.value ?? []); break;
+            case "Tools Known":
+              this.options = (tools.value ?? []); break;
+            case "Tools Desired To Learn":
+              this.options = (tools.value ?? []); break;
+            case "Topic Interests":
+              this.options = (topics.value ?? []); break;
+          }
+        } else {
+          switch (this.title) {
+            case "Type":
+              this.options = (types.value ?? []); break;
+            case "Difficulty":
+              this.options = (difficulties.value ?? []); break;
+            case "Time":
+              this.options = (times.value ?? []); break;
+            case "Tools":
+              this.options = (tools.value ?? []); break;
+            case "Topics":
+              this.options = (topics.value ?? []); break;
+          }
+        }
+      },
+      removeExistingPreferencesFromOptions(){
+        const parsable_title: string = formatToCamelCase(this.title);
+        const section_preferences: string[] = preferences[parsable_title as keyof typeof preferences].value;
+        this.options = this.options.filter((item: string) => !section_preferences.includes(item));
+      }
     },
+    mounted() {
+      this.setOptions();
+      if (this.inModal){
+        this.removeExistingPreferencesFromOptions();
+      }
+    }
 });
 </script>
   

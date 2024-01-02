@@ -83,7 +83,7 @@ export const cancel_preferences_changes = () => {
     preferences.topicInterests.value = past_preferences.topicInterests;
 }
 
-const formatToCamelCase = (input: string): string =>
+export const formatToCamelCase = (input: string): string =>
   input
     .split(' ')
     .map((word, index) => (index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1)))
