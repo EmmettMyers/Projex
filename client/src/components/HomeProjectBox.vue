@@ -136,7 +136,7 @@
         position: relative;
         padding-left: 20px;
         #name {
-          max-width: 18vw;
+          max-width: 20vw;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis; 

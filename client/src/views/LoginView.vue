@@ -1,5 +1,5 @@
 <template>
-    <div id="page">
+    <div id="page" v-show="backgroundLoaded">
         <div id="login">
             <div class="center-vert center-horiz">
                 <div id="container">
@@ -25,6 +25,19 @@ export default defineComponent({
     name: 'LoginView',
     components: {
         GoogleSignIn
+    },
+    data() {
+        return {
+            backgroundLoaded: false
+        };
+    },
+    mounted() {
+        const background = document.getElementById('background');
+        if (background) {
+            background.addEventListener('load', () => {
+                this.backgroundLoaded = true;
+            });
+        }
     },
 });
 </script>
