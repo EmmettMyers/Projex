@@ -41,13 +41,18 @@
         />
       </div>
       <PageHeader :title="pageTitle" :description="pageDescription" />
+      <div v-if="loading == true" id="loader-holder" class="center-horiz">
+        <div id="loader"></div>
+      </div>
       <PreferenceBar 
+        v-if="loading == false"
         title="Project Interests" 
         :options="preferences.projectInterests" 
         :editMode="editMode" 
         :openModalParent="openAddModal"
       />
       <PreferenceBar 
+        v-if="loading == false"
         title="Tools Known" 
         :options="preferences.toolsKnown" 
         :editMode="editMode" 
@@ -55,12 +60,14 @@
         :openModalParent="openAddModal"
       />
       <PreferenceBar 
+        v-if="loading == false"
         title="Tools Desired To Learn" 
         :editMode="editMode" 
         :options="preferences.toolsDesiredToLearn"
         :openModalParent="openAddModal"
       />
       <PreferenceBar 
+        v-if="loading == false"
         title="Topic Interests" 
         :editMode="editMode" 
         :options="preferences.topicInterests" 
@@ -91,6 +98,7 @@
         preferences: preferences,
         modalOpen: false,
         modalTitle: "",
+        loading: true
       };
     },
     methods: {
@@ -113,8 +121,9 @@
         this.toggleEditMode();
       }
     },
-    mounted() {
-      preset_preferences();
+    async mounted() {
+      await preset_preferences();
+      this.loading = false;
     }
   });
 </script>
@@ -129,6 +138,18 @@
       float: right;
       margin-top: 65px;
       margin-right: 5vw;
+    }
+    #loader-holder {
+      #loader {
+        width: 80px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 14px solid #7DBCCE;
+        border-right-color: #313235;
+        animation: l2 .75s infinite linear;
+        margin-top: 150px;
+      }
+      @keyframes l2 {to{transform: rotate(1turn)}}
     }
   }
 </style>

@@ -16,7 +16,7 @@ export const times = ref<string[]>([
 
 export const tools = ref<string[]>();
 
-export const resetTools = () => {
+export const reset_tools = () => {
     tools.value = [
         'Java', 'Python', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Angular', 'Vue', 'Django', 
         'Node', 'Swift', 'Go', 'Flask', 'Ruby on Rails', 'GraphQL', 'MongoDB', 'MySQL', 'PostgreSQL', 'Kotlin', 
@@ -27,7 +27,7 @@ export const resetTools = () => {
 
 export const topics = ref<string[]>();
 
-export const resetTopics = () => {
+export const reset_topics = () => {
     topics.value = [
         'Sports', 'Education', 'Finance', 'Career', 'Food', 'Scheduling', 'Music', 'History', 'Science',
         'Books', 'Movies', 'Fitness', 'Social', 'Writing', 'Crafts', 'Pets', 'Photography', 'Activism',

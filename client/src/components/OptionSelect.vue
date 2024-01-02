@@ -29,6 +29,7 @@
   import { defineComponent } from 'vue';
   import CustomOption from './CustomOption.vue';
   import { add_preference } from '@/utils/preferences';
+  import { add_option, remove_option } from '@/utils/generatedProjects';
   
   export default defineComponent({
     name: 'OptionSelect',
@@ -44,13 +45,23 @@
         this.selectedOptions.unshift(option);
       },
       optionClicked(option: string) {
+        // change local selectedOptions
         const index = this.selectedOptions.indexOf(option);
         if (index === -1) {
           this.selectedOptions.push(option);
+          // in generate page
+          if (this.inModal === undefined) {
+            add_option(this.title, option);
+          }
         } else {
           this.selectedOptions.splice(index, 1);
+          // in generate page
+          if (this.inModal === undefined) {
+            remove_option(this.title, option);
+          }
         }
-        if (this.inModal) {
+        // set global selectedOptions if in preferences
+        if (this.parentSelectedSet) {
           this.parentSelectedSet(this.selectedOptions);
         }
       },

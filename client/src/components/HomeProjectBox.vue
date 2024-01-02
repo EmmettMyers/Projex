@@ -3,14 +3,22 @@
 
     <div id="top-row" class="center-vert">
       <div class="center-vert">
-        <div id="name">{{ project.name }}</div>
+        <div 
+          id="name-holder"
+          @mouseover="setTooltip(-1)"
+          @mouseout="setTooltip(-2)" 
+        >
+          <div id="name">{{ project.name }}</div>
+          <div class="tooltip" v-if="tooltipIndex === -1">{{ project.name }}</div>
+        </div>
         <div id="divider"></div>
       </div>
       <div 
         id="tool-holder" 
         v-for="(tool, index) in project.tools" 
         @mouseover="setTooltip(index)"
-        @mouseout="setTooltip(-1)" :key="index"
+        @mouseout="setTooltip(-2)" 
+        :key="index"
       >
         <img 
           :src="getToolImageSrc(tool)" 
@@ -26,8 +34,9 @@
           backColor="#E22C2C" 
           textColor="#FDEBEB" 
           horizPad="30px" 
-          vertPad="8px" 
+          vertPad="6px" 
           fontSize="18px"
+          @click="unsaveProject"
         />
         <CustomButton 
           v-else
@@ -35,8 +44,9 @@
           backColor="#328D30" 
           textColor="#D8FFD8" 
           horizPad="30px" 
-          vertPad="8px" 
+          vertPad="6px" 
           fontSize="18px"
+          @click="saveProject"
         />
       </div>
     </div>
@@ -51,6 +61,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import CustomButton from '@/components/CustomButton.vue';
+  import { save_project, unsave_project } from '@/utils/savedProjects';
   
   export default defineComponent({
     name: 'HomeProjectBox',
@@ -58,7 +69,7 @@
     components: { CustomButton },
     data() {
       return {
-        tooltipIndex: -1
+        tooltipIndex: -2
       };
     },
     methods: {
@@ -72,6 +83,14 @@
           return require(`@/assets/tools/unknown.png`);
         }
       },
+      saveProject() {
+        save_project(this.project.name, this.project.description);
+        this.project.saved = true;
+      },
+      unsaveProject() {
+        unsave_project(this.project.name, this.project.description);
+        this.project.saved = false;
+      },  
     }
   });
 </script>
@@ -81,12 +100,14 @@
     position: absolute;
     background: #313235;
     color: white;
+    top: 48px;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 6px;
-    font-size: 15px;
+    font-size: 18px;
+    z-index: 60;
   }
   #box {
     background: white;
@@ -97,33 +118,40 @@
     #top-row {
       display: flex;
       justify-content: flex-start;
-      #name {
-        max-width: 360px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis; 
-        padding-top: 12px;
-        font-size: 30px;
-        font-weight: 600;
+      #name-holder {
+        position: relative;
         padding-left: 20px;
+        #name {
+          max-width: 330px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; 
+          padding-top: 12px;
+          font-size: 30px;
+          font-weight: 600;
+        }
+        .tooltip {
+          margin-top: 4px;
+        }
       }
       #divider {
         width: 4px;
         height: 30px;
         background: #7DBCCE;
         margin-top: 10px;
-        margin-left: 20px;
-        margin-right: 16px;
+        margin-left: 14px;
+        margin-right: 12px;
         border-radius: 4px;
       }
       #tool-holder {
+        position: relative;
         padding-top: 16px;
         img {
           padding-left: 5px;
         }
       }
       #btn-holder {
-        margin-top: 12px;
+        margin-top: 8px;
         margin-left: auto;
         margin-right: 20px;
       }

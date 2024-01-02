@@ -3,13 +3,21 @@
         <div id="box" class="center-vert">
             <div id="content">
                 <div id="top-row">
-                    <div id="name">{{ project.name }}</div>
+                    <div 
+                        id="name-holder"
+                        @mouseover="setTooltip(-1)"
+                        @mouseout="setTooltip(-2)" 
+                    >
+                        <div id="name">{{ project.name }}</div>
+                        <div class="tooltip" v-if="tooltipIndex === -1">{{ project.name }}</div>
+                    </div>
                     <div id="divider"></div>
                     <div 
                         id="tool-holder" 
                         v-for="(tool, index) in project.tools" 
                         @mouseover="setTooltip(index)"
-                        @mouseout="setTooltip(-1)" :key="index"
+                        @mouseout="setTooltip(-2)" 
+                        :key="index"
                     >
                         <img 
                             :src="getToolImageSrc(tool)" 
@@ -72,6 +80,7 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import CustomButton from '@/components/CustomButton.vue';
+    import { save_project, unsave_project } from '@/utils/savedProjects';
 
     export default defineComponent({
         name: 'ProjectBox',
@@ -79,7 +88,7 @@
         props: ['project'],
         data() {
             return {
-                tooltipIndex: -1
+                tooltipIndex: -2
             };
         },
         methods: {
@@ -94,10 +103,12 @@
                 }
             },
             saveProject() {
-                //
+                save_project(this.project.name, this.project.description);
+                this.project.saved = true;
             },
             unsaveProject() {
-                //
+                unsave_project(this.project.name, this.project.description);
+                this.project.saved = false;
             },
         },
     });
@@ -108,12 +119,14 @@
         position: absolute;
         background: #313235;
         color: white;
+        top: 62px;
         padding-top: 5px;
         padding-bottom: 5px;
         padding-left: 10px;
         padding-right: 10px;
         border-radius: 6px;
         font-size: 18px;
+        z-index: 60;
     }
     #box {
         background: white;
@@ -131,15 +144,21 @@
                 #code-btn, #save-btn {
                     padding-top: 20px;
                 }
-                #name {
-                    max-width: 400px;
-                    padding-top: 16px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis; 
-                    font-size: 40px;
-                    font-weight: 600;
+                #name-holder {
+                    position: relative;
                     padding-left: 36px;
+                    #name {
+                        max-width: 460px;
+                        padding-top: 16px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis; 
+                        font-size: 40px;
+                        font-weight: 600;
+                    }
+                    .tooltip {
+                        margin-top: 6px;
+                    }
                 }
                 #divider {
                     width: 4px;
@@ -151,6 +170,7 @@
                     border-radius: 4px;
                 }
                 #tool-holder {
+                    position: relative;
                     padding-top: 22px;
                     img {
                         padding-left: 8px;

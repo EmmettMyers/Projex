@@ -13,7 +13,7 @@ def is_user_new(supabase, email):
         .execute()
     return True if len(data[1]) == 0 else False
 
-def get_user_id(supabase, email):
+def email_to_user_id(supabase, email):
     data, count = supabase.table('users') \
         .select('id') \
         .eq('email', email) \
@@ -21,7 +21,7 @@ def get_user_id(supabase, email):
     id = data[1][0]['id']
     return id
 
-def get_generation_id(supabase, user_id, title, description):
+def user_id_to_generation_id(supabase, user_id, title, description):
     data, count = supabase.table('generations') \
         .select('id') \
         .eq('user_id', user_id) \
@@ -33,17 +33,17 @@ def get_generation_id(supabase, user_id, title, description):
 
 def generate_projects(preferences, options):
     # developer preferences, string form
-    project_interests = ", ".join(preferences.project_interests)
-    tools_known = ", ".join(preferences.tools_known)
-    tools_desired_to_learn = ", ".join(preferences.tools_desired_to_learn)
-    topic_interests = ", ".join(preferences.topic_interests)
+    project_interests = ", ".join(preferences['project_interests'])
+    tools_known = ", ".join(preferences['tools_known'])
+    tools_desired_to_learn = ", ".join(preferences['tools_desired_to_learn'])
+    topic_interests = ", ".join(preferences['topic_interests'])
 
     # selected generation options, string form
-    type = options.type
-    difficulty = options.difficulty
-    time = options.time
-    tools = ", ".join(options.tools)
-    topics = ", ".join(options.topics)
+    type = ", ".join(options['type'])
+    difficulty = ", ".join(options['difficulty'])
+    time = ", ".join(options['time'])
+    tools = ", ".join(options['tools'])
+    topics = ", ".join(options['topics'])
 
     # gpt query
     query_intro = "You are the engine behind an application that generates personal coding project ideas for aspiring software engineers who want unique and interesting project ideas. The users have their preferences saved, but also select options for the current app types they want to generate. Lean on their options selected, but if you need extra inspiration use their preferences. Come up with a list of 10 personal coding project ideas using their preferences and options selected. For each project idea, layout the 'Title', 'Coding Tools', a 1 paragraph 'Description', the 'Difficulty' based on their developer tools known and the tools of the current project, and estimated 'Time' based on their skills. Make sure the project ideas are unique and stand out in a resume as interesting and personalized."
@@ -91,6 +91,11 @@ def generate_projects(preferences, options):
             key, value = line.split(': ', 1)
             if ("Title" in key):
                 key = key.split()[-1]
+                value = value.strip('"')
+            if (key == "Coding Tools"):
+                value = value.split(',')
+                for i in range(len(value)):
+                    value[i] = value[i].lstrip()
             project_dict[key] = value
         project_list.append(project_dict)
 

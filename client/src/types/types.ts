@@ -1,11 +1,12 @@
+import { Ref, ref } from "vue";
 
-interface Project {
+export interface Project {
     name: string;
     description: string;
     difficulty: string;
     time: string;
     tools: string[];
-    image: string;
+    image?: string;
     code?: Codebase;
     saved?: boolean;
 }
@@ -25,9 +26,19 @@ interface File {
     contents: string;
 }
 
-interface Preferences {
-    projectInterests: string[];
-    toolsKnown: string[];
-    toolsDesiredToLearn: string[];
-    topicInterests: string[];
+export interface Preferences {
+    [key: string]: Ref<string[]>;
+    projectInterests: Ref<string[]>;
+    toolsKnown: Ref<string[]>;
+    toolsDesiredToLearn: Ref<string[]>;
+    topicInterests: Ref<string[]>;
+}
+
+export interface Options {
+    [key: string]: Ref<string[]>;
+    type: Ref<string[]>;
+    difficulty: Ref<string[]>;
+    time: Ref<string[]>;
+    tools: Ref<string[]>;
+    topics: Ref<string[]>;
 }

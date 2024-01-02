@@ -1,7 +1,8 @@
+import { Preferences } from '@/types/types';
 import axios from 'axios';
 import { ref } from 'vue';
 
-export const preferences = {
+export const preferences: Preferences = {
     'projectInterests': ref<string[]>([]),
     'toolsKnown': ref<string[]>([]),
     'toolsDesiredToLearn': ref<string[]>([]),

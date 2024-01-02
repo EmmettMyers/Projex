@@ -14,7 +14,9 @@
     props: ['title', 'description', 'miniTitle'],
     methods: {
       exitPage() {
-        if (this.title == "Generated Projects" || this.miniTitle){
+        if (this.title == "Generated Projects"){
+          this.$router.go(-2);
+        } else if (this.miniTitle){
           this.$router.go(-1);
         } else {
           this.$router.push('/home');

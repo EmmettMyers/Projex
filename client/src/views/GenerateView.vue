@@ -31,8 +31,9 @@
     import CustomButton from '@/components/CustomButton.vue';
     import OptionSelect from '@/components/OptionSelect.vue';
     import PageHeader from '@/components/PageHeader.vue';
-    import { types, difficulties, times, tools, topics, resetTools, resetTopics }  from '@/utils/generateOptions';
+    import { types, difficulties, times, tools, topics, reset_tools, reset_topics }  from '@/utils/generateOptions';
     import { defineComponent } from 'vue';
+    import { get_project_generations, reset_selected_options } from '@/utils/generatedProjects';
 
     export default defineComponent({
         name: 'GenerateView',
@@ -49,13 +50,16 @@
             };
         },
         methods: {
-            generateProjects() {
+            async generateProjects() {
+                this.$router.push('/loading');
+                await get_project_generations();
                 this.$router.push('/generated');
             },
         },
         mounted() {
-            resetTools();
-            resetTopics();
+            reset_selected_options();
+            reset_tools();
+            reset_topics();
         }
     });
 </script>

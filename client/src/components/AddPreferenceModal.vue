@@ -31,7 +31,7 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import OptionSelect from './OptionSelect.vue';
-    import { types, tools, topics, resetTools, resetTopics }  from '@/utils/generateOptions';
+    import { types, tools, topics, reset_tools, reset_topics }  from '@/utils/generateOptions';
     import CustomButton from './CustomButton.vue';
     import { add_preference } from '@/utils/preferences';
 
@@ -57,8 +57,8 @@
             }
         },
         mounted() {
-            resetTools();
-            resetTopics();
+            reset_tools();
+            reset_topics();
             switch (this.title) {
                 case "Project Interests":
                     this.modalOptions = (types.value ?? []); break;

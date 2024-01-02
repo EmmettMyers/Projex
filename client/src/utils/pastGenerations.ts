@@ -1,40 +1,52 @@
+import { Project } from '@/types/types';
+import axios from 'axios';
 import { ref } from 'vue';
 
-export const pastGenerations = ref<Project[]>([
-    {
-        name: 'Food Cart',
-        description: 'A user-friendly web app allowing food cart vendors to showcase their menu, accept orders, and facilitate seamless transactions with customers.',
-        difficulty: 'Intermediate',
-        time: '2-3 weeks',
-        tools: ['HTML', 'CSS', 'JavaScript', 'MongoDB'],
-        image: 'project-image.png',
-        saved: false,
-    },
-    {
-        name: 'Food Cart',
-        description: 'A user-friendly web app allowing food cart vendors to showcase their menu, accept orders, and facilitate seamless transactions with customers.',
-        difficulty: 'Intermediate',
-        time: '2-3 weeks',
-        tools: ['HTML', 'CSS', 'JavaScript', 'Node', 'Docker'],
-        image: 'project-image.png',
-        saved: false,
-    },
-    {
-        name: 'Food Cart',
-        description: 'A user-friendly web app allowing food cart vendors to showcase their menu, accept orders, and facilitate seamless transactions with customers.',
-        difficulty: 'Intermediate',
-        time: '2-3 weeks',
-        tools: ['HTML', 'CSS', 'JavaScript', 'Node', 'Docker'],
-        image: 'project-image.png',
-        saved: false,
-    },
-    {
-        name: 'Food Cart',
-        description: 'A user-friendly web app allowing food cart vendors to showcase their menu, accept orders, and facilitate seamless transactions with customers.',
-        difficulty: 'Intermediate',
-        time: '2-3 weeks',
-        tools: ['HTML', 'CSS', 'JavaScript', 'Node', 'Docker'],
-        image: 'project-image.png',
-        saved: false,
-    },
-]);
+export const past_generations = ref<Project[]>([]);
+
+export const preset_past_generations = async () => {
+    const user_data = { email: "emmettleemyers@gmail.com" };
+    const saved_response = await axios.post('http://127.0.0.1:8000/get_saved_projects/', user_data);
+    const saved_projects = saved_response.data;
+    const response = await axios.post('http://127.0.0.1:8000/get_past_generations/', user_data);
+    // check if there are any past generations
+    if (response.data[1].length > 0){
+        const generations = [] as Project[];
+        for (const data of response.data[1]){
+            // check if generation is in saved projects
+            let saved = false;
+            for (const project of saved_projects){ 
+                if (project['description'] == data['description']){
+                    saved = true;
+                }
+            }
+            // push generated project into generations
+            const generation: Project = {
+                name: data['title'],
+                description: data['description'],
+                difficulty: data['difficulty'],
+                time: data['time'],
+                tools: data['tools'],
+                saved: saved,
+            }
+            generations.push(generation);
+        }
+        let randomized_generations = shuffleArray(generations);
+        if (randomized_generations.length > 20){
+            randomized_generations = randomized_generations.slice(0, 20);
+        }
+        past_generations.value = randomized_generations;
+    }
+}
+
+const getFirstSentence = (paragraph: string) => {
+    const sentences = paragraph.split(/\.|\?|!/);
+    const firstSentence = sentences[0].trim();
+    return firstSentence + ".";
+}
+
+const shuffleArray = (array: Project[]) => {
+    const shuffledArray = [...array];
+    shuffledArray.sort(() => Math.random() - 0.5);
+    return shuffledArray;
+}

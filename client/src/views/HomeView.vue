@@ -9,24 +9,27 @@
         </div>
         <div id="blue-line"></div>
         <div id="past-generations-title">Your Past Generated Projects</div>
-        <div id="project-holder">
+        <div v-if="loading == true" id="loader-holder" class="center-horiz">
+          <div id="loader"></div>
+        </div>
+        <div v-if="loading == false" id="project-holder">
           <HomeProjectBox v-for="(project, index) in pastGeneratedProjects" :key="index" :project="project" />
           <div style="height: 30px"></div>
         </div>
       </div>
 
       <div id="right-holder">
-        <div id="pref-btn" class="center-horiz center-vert" @click="enterPreferences">
+        <div id="pref-btn" class="center-horiz center-vert" @click="navigate('preferences')">
           Set Project Preferences
         </div>
-        <div id="gen-btn" class="center-horiz center-vert" @click="enterGenerate">
+        <div id="gen-btn" class="center-horiz center-vert" @click="navigate('generate')">
           Generate<br>Project<br>Ideas
         </div>
         <div id="bottom-btn-holder">
-          <div id="saved-btn" class="center-horiz center-vert" @click="enterSaved">
+          <div id="saved-btn" class="center-horiz center-vert" @click="navigate('saved')">
             View<br>Saved<br>Projects
           </div>
-          <div id="pool-btn" class="center-horiz center-vert" @click="enterPool">
+          <div id="pool-btn" class="center-horiz center-vert" @click="navigate('pool')">
             Explore<br>Project<br>Pool
           </div>
         </div>
@@ -39,31 +42,27 @@
 <script lang="ts">
   import NavBar from '@/components/NavBar.vue';
   import HomeProjectBox from '@/components/HomeProjectBox.vue';
-  import { pastGenerations } from '@/utils/pastGenerations';
+  import { past_generations, preset_past_generations } from '@/utils/pastGenerations';
   import { defineComponent } from 'vue';
 
   export default defineComponent({
     name: 'HomeView',
     components: { NavBar, HomeProjectBox },
     methods: {
-      enterPreferences() {
-        this.$router.push('/preferences');
-      },
-      enterSaved() {
-        this.$router.push('/saved');
-      },
-      enterPool() {
-        this.$router.push('/pool');
-      },
-      enterGenerate() {
-        this.$router.push('/generate');
+      navigate(page: string) {
+        this.$router.push(page);
       },
     },
     data() {
       return {
-        pastGeneratedProjects: pastGenerations.value
+        pastGeneratedProjects: past_generations,
+        loading: true
       };
     },
+    async mounted() {
+      await preset_past_generations();
+      this.loading = false;
+    }
   });
 </script>
 
@@ -96,6 +95,18 @@
         font-size: 30px;
         font-weight: 500;
         padding-bottom: 15px;
+      }
+      #loader-holder {
+        #loader {
+          width: 80px;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          border: 14px solid #7DBCCE;
+          border-right-color: #313235;
+          animation: l2 .75s infinite linear;
+          margin-top: 120px;
+        }
+        @keyframes l2 {to{transform: rotate(1turn)}}
       }
       #project-holder {
         height: 440px;

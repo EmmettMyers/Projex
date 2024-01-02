@@ -44,7 +44,7 @@ def add_new_user(request):
 def get_preferences(request):
     data = json.loads(request.body)
     email = data.get('email')
-    user_id = get_user_id(supabase, email)
+    user_id = email_to_user_id(supabase, email)
     data, count = supabase.table('preferences').select('*').eq('user_id', user_id).execute()
     return JsonResponse(data, safe=False)
 
@@ -56,7 +56,7 @@ def update_preferences(request):
     tools_known = data.get('toolsKnown')
     tools_desired_to_learn = data.get('toolsDesiredToLearn')
     topic_interests = data.get('topicInterests')
-    user_id = get_user_id(supabase, email)
+    user_id = email_to_user_id(supabase, email)
     data, count = supabase.table('preferences') \
         .update({
             'project_interests': project_interests,
@@ -67,15 +67,28 @@ def update_preferences(request):
         .execute()
     return JsonResponse(data, safe=False)
 
+@csrf_exempt
+def get_past_generations(request):
+    data = json.loads(request.body)
+    email = data.get('email')
+    user_id = email_to_user_id(supabase, email)
+    data, count = supabase.table('generations').select('*').eq('user_id', user_id).execute()
+    return JsonResponse(data, safe=False)
+
+@csrf_exempt
 def get_project_generations(request):
-    user_id = get_user_id(request.email)
-    preferences = get_preferences(request)
-    options = request.options
+    data = json.loads(request.body)
+    email = data.get('email')
+    user_id = email_to_user_id(supabase, email)
+    preferences_data, count = supabase.table('preferences').select('*').eq('user_id', user_id).execute()
+    preferences = preferences_data[1][0]
+    options = data.get('options')
     generated_projects = generate_projects(preferences, options)
     for project in generated_projects:
         add_generation(user_id, project)
-    return JsonResponse(generated_projects)
+    return JsonResponse(generated_projects, safe=False)
 
+@csrf_exempt
 def add_generation(user_id, project):
     data, count = supabase.table('generations').insert({
         "user_id": user_id,
@@ -85,28 +98,55 @@ def add_generation(user_id, project):
         "difficulty": project['Difficulty'],
         "time": project['Time']
     }).execute()
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
 
+@csrf_exempt
 def get_saved_projects(request):
-    user_id = get_user_id(request.email)
-    data, count = supabase.table('saved_projects').select('*').eq('user_id', user_id).execute()
-    return JsonResponse(data)
+    data = json.loads(request.body)
+    email = data.get('email')
+    user_id = email_to_user_id(supabase, email)
+    saved_projects = []
+    saved, count = supabase.table('saved_projects').select('generation_id').eq('user_id', user_id).execute()
+    for generation in saved[1]:
+        data, count = supabase.table('generations') \
+            .select('*') \
+            .eq('id', generation['generation_id']) \
+            .execute()
+        project = data[1][0]
+        saved_projects.append(project)
+    return JsonResponse(saved_projects, safe=False)
 
+@csrf_exempt
 def add_saved_project(request):
-    user_id = get_user_id(request.email)
-    generation_id = get_generation_id(user_id, request.title, request.description)
+    data = json.loads(request.body)
+    email = data.get('email')
+    title = data.get('title')
+    description = data.get('description')
+    user_id = email_to_user_id(supabase, email)
+    generation_id = user_id_to_generation_id(supabase, user_id, title, description)
     data, count = supabase.table('saved_projects').insert({
         "user_id": user_id,
         "generation_id": generation_id
     }).execute()
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
 
+@csrf_exempt
 def delete_saved_project(request):
-    user_id = get_user_id(request.email)
-    generation_id = get_generation_id(user_id, request.title, request.description)
+    data = json.loads(request.body)
+    email = data.get('email')
+    title = data.get('title')
+    description = data.get('description')
+    user_id = email_to_user_id(supabase, email)
+    generation_id = user_id_to_generation_id(supabase, user_id, title, description)
     data, count = supabase.table('saved_projects') \
         .delete() \
         .eq('user_id', user_id) \
         .eq('generation_id', generation_id) \
         .execute()
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def get_project_pool(request):
+    data, count = supabase.table('generations').select('*').execute()
+    project_pool = data[1][:50]
+    return JsonResponse(project_pool, safe=False)

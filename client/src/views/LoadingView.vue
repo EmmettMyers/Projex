@@ -2,7 +2,7 @@
     <div>
         <NavBar />
         <div id="loading" class="center-horiz center-vert">
-            <div id="text">{{ text }}</div>
+            <div id="text">Generating projects...</div>
             <div id="loader"></div>
         </div>
     </div>
@@ -14,7 +14,6 @@
 
     export default defineComponent({
         name: 'LoadingView',
-        props: ['text'],
         components: { NavBar },
         data() {
             return {
@@ -33,7 +32,6 @@
             font-weight: 500;
             padding-bottom: 40px;
         }
-        /* HTML: <div class="loader"></div> */
         #loader {
             width: 120px;
             aspect-ratio: 1;
@@ -44,7 +42,6 @@
             margin-bottom: 80px;
         }
         @keyframes l2 {to{transform: rotate(1turn)}}
-
     }
 </style>
     
