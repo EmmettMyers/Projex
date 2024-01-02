@@ -13,7 +13,7 @@
 
 <br/>
 <b>Projex is a web app that generates coding personal project ideas based on user preferences, skills, and interests.</b>
-
+<br/>
 
 Some of its main sections include:
  - <strong>Dashboard</strong>, which includes some of the user's past generated projects, navigation to the main pages, and a short statement of the app's purpose
